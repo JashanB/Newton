@@ -2,10 +2,23 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
+
   router.get("/", (req, res) => {
-    res.render('../views/resources')
-  });
-  return router;
-};
+      db.query(`SELECT * FROM users;`)
+        .then(data => {
+          const users = data.rows;
+          res.render('../views/resources', {users})
+          console.log(users)
+
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    });
+    return router;
+  }
 
 
