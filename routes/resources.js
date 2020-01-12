@@ -2,11 +2,11 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-      db.query(`SELECT * FROM users;`)
+  router.get("/:id", (req, res) => {
+      db.query(`SELECT * FROM resources WHERE id = ${req.params.id};`)
         .then(data => {
-          const users = data.rows
-          res.render('../views/resources', { users })
+          const resource = data.rows[0]
+          res.render('../views/resources', { resource })
         })
         .catch(err => {
           res
