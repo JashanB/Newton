@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/resource/:id", (req, res) => {
-  db.query(`SELECT * FROM resources WHERE resource.id = ${};`)
+  db.query(`SELECT * FROM resources WHERE resource.id = ${example};`)
     .then(data => {
       const users = data.rows;
       res.render('resources', { users });

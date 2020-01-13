@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Reources</title>
+
+
+    <style>
+      .user-box {
+        border: red 1px solid;
+        width: 25%;
+        margin: 10px auto;
+        text-align: center;
+      }
+    </style>
+
+
+  </head>
+  <body>
+
+
+    <!-- Import header partial -->
+    <%- include('./partials/_header') %>
+
+
+    <!-- For each user passed in, generate a box with id and name -->
+    <% for(let user in users) { %>
+      <ul class="user-box">
+        <h3 class="user-id"><%= users[user].id %></h3>
+        <h1 class="user-name"><%= users[user].name %></h1>
+      </ul>
+    <% }; %>
+
+
+
+  </body>
+</html>
