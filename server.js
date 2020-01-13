@@ -45,6 +45,15 @@ app.use("/users", usersRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+  db.query(`SELECT * FROM resources ORDER BY avg(ratings.id);`)
+  .then(data => {
+    const users = data.rows;
+    res.render('index', { users });
+  })
+  .catch(err => {
+    console.error(err);
+    // res.redirect('/');
+  });
   res.render("index", { fakeObjectFromDB: {
     title: 'Hello World 2.0'
   }});
