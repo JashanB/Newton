@@ -6,34 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Reources</title>
 
-
     <style>
-      .user-box {
-        border: red 1px solid;
-        width: 25%;
-        margin: 10px auto;
-        text-align: center;
+      .resource {
+        margin: 0% 20% 0% 20%;
       }
+
+      .img {
+        border: 1px black solid;
+      }
+
+      .likes-ratings {
+        width: fit-content;
+      }
+
+      .resource-comemnts {
+        border: 1px black solid;
+        margin-top: 10px;
+      }
+
+      .comment header {
+        display: flex;
+        justify-content:  space-between;
+
+      }
+
     </style>
-
-
   </head>
   <body>
-
-
     <!-- Import header partial -->
     <%- include('./partials/_header') %>
 
+    <section class="resource">
 
-    <!-- For each user passed in, generate a box with id and name -->
-    <% for(let user in users) { %>
-      <ul class="user-box">
-        <h3 class="user-id"><%= users[user].id %></h3>
-        <h1 class="user-name"><%= users[user].name %></h1>
+      <div class="img">
+        <img class="resource-img" src=<%= resource.img_url %> />
+      </div>
+
+      <section class="likes-ratings">
+        RATING: <%= resource.rating %> LIKE <%= resource.likes %>
+      </section>
+
+      <a href="www.google.com">Link</a>
+
+      <p class="resource-desciption"><%= resource.description %></p>
+
+    <section class="resource-comemnts">
+      <article class="comment">
+        <header>
+          <h1>UserName</h1>
+          <h4>created_at</h4>
+        </header>
+
+        <body>
+          <p>Narwhal cornhole organic kickstarter prism pop-up. Green juice pug flannel forage, 90's cardigan narwhal helvetica bespoke leggings sartorial microdosing four dollar toast.</p>
+        </body>
+      </article>
+
+
+
+    <!--
+
+    <section>
+
+    </section>
+
+
+
+    <h1 class="resource-title"><%= resource.title %></h1>
+    <h3 class="resource-link"><%= resource.link %></h3>
+    <p class="resource-description"><%= resource.link %></p> -->
+
+    <!-- For each comment passed in, generate a box with id and name -->
+    <!-- <% for(let comment in resource) { %>
+      <ul class="comment-box">
+        <h2 class="comment_user"><%= resource[comment].id %></h2>
+        <h3 class="comment_created"></h3>
+        <p class="comment-text"><%= resource[comment].name %></p>
       </ul>
-    <% }; %>
-
-
-
+    <% }; %> -->
   </body>
 </html>
