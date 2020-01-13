@@ -6,6 +6,7 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
@@ -30,6 +31,12 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: 'session',
+  secret: 'midterm',
+  // Cookie Options
+  maxAge: 5 * 60 * 1000 // 5 minutes
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -49,6 +56,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/signup", (req,res) => {
+  res.render("signup");
+})
+
+// res.render('_register', templateVars);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
