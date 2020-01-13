@@ -12,7 +12,7 @@ const morgan     = require('morgan');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
+const dbParams = require('../lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
@@ -33,13 +33,11 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const usersRoutes = require("../routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/users", usersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -47,7 +45,21 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { fakeObjectFromDB: {
+    title: 'Hello World 2.0'
+  }});
+});
+
+app.get("/resource/:id", (req, res) => {
+  db.query(`SELECT * FROM resources WHERE resource.id = ${};`)
+    .then(data => {
+      const users = data.rows;
+      res.render('resources', { users });
+    })
+    .catch(err => {
+      console.error(err);
+      res.redirect('/');
+    });
 });
 
 app.listen(PORT, () => {
