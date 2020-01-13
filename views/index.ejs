@@ -11,11 +11,9 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
-<!--search bar get request - redirect to / but with different select query -->
-<!-- fitler for search - post request -->
-
+<%- include('./partials/_header') %>
 <body>
-  <h1><%= fakeObjectFromDb.title %>></h1>
+  <h1>></h1>
   <div class="wrap">
     <div class="search">
        <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -23,16 +21,12 @@
          <i class="fa fa-search"></i>
       </button>
     </div>
+    <div class="filter">
+        <form method="GET" action='/mostrecent'><button class="submit">Most Recent</button>
+          <!-- make into drop down list for filter -->
+     </div>
   </div>
- <div>
-    <form method="GET" action=>
-        <select name = "dropdown">
-           <option value = "Most Popular" selected>Most Popular</option>
-           <option value = "Most Recent">Most Recent</option>
-        </select>
-     </form>
- </div>
- <div>Column one<button method="post" action='/like'></button></div>
+ <div>Column one<button method="post" action='/like'></button></div> <!-- make it so adds on like (click), click again deletes -->
  <div>Column two</div>
  <div>Column three</div>
  <div>Column four</div>
