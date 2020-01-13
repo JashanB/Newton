@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS topics_resources CASCADE
+DROP TABLE IF EXISTS topics_resources CASCADE;
 
 CREATE TABLE topics_resources (
   topic_id INTEGER REFERENCES topics(id) ON DELETE CASCADE,
