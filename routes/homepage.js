@@ -3,19 +3,15 @@ const router  = express.Router();
 
 module.exports = (db) => {
 router.get("/", (req, res) => {
-  db.getResourcesOrderByAvgRating()
+  db.getResourcesOrderByCountRating()
   .then(data => {
-    const users = data.rows;
-    res.render('index', { users });
+    const resource = {data:data};
+    res.render('index', { resource });
   })
   .catch(err => {
     console.error(err);
-    // res.redirect('/');
   });
-  // res.render("index", { fakeObjectFromDB: {
-  //   title: 'Hello World 2.0'
-  // }});
-  res.render('index')
+  // res.render('index')
 });
 router.get("/search", (req, res) => {
   //pass in params inputed from search to db query
@@ -28,11 +24,7 @@ router.get("/search", (req, res) => {
   })
   .catch(err => {
     console.error(err);
-    // res.redirect('/');
   });
-  // res.render("index", { fakeObjectFromDB: {
-  //   title: 'Hello World 2.0'
-  // }});
   res.render('index');
 });
 

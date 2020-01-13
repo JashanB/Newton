@@ -36,7 +36,9 @@
     <!-- Import header partial -->
     <%- include('./partials/_header') %>
 
-    <!-- <section class="resource">
+
+
+    <section class="resource">
 
       <div class="img">
         <img class="resource-img" src=<%= resource.img_url %> />
@@ -46,7 +48,7 @@
         RATING: <%= resource.rating %> LIKE <%= resource.likes %>
       </section>
 
-      <a href="www.google.com">Link</a>
+      <a href=<%= resource.url %>>Link</a>
 
       <p class="resource-desciption"><%= resource.description %></p>
 
@@ -60,29 +62,7 @@
         <body>
           <p>Narwhal cornhole organic kickstarter prism pop-up. Green juice pug flannel forage, 90's cardigan narwhal helvetica bespoke leggings sartorial microdosing four dollar toast.</p>
         </body>
-      </article> -->
+      </article>
 
-
-
-    <!--
-
-    <section>
-
-    </section>
-
-
-
-    <h1 class="resource-title"><%= resource.title %></h1>
-    <h3 class="resource-link"><%= resource.link %></h3>
-    <p class="resource-description"><%= resource.link %></p> -->
-
-    <!-- For each comment passed in, generate a box with id and name -->
-    <!-- <% for(let comment in resource) { %>
-      <ul class="comment-box">
-        <h2 class="comment_user"><%= resource[comment].id %></h2>
-        <h3 class="comment_created"></h3>
-        <p class="comment-text"><%= resource[comment].name %></p>
-      </ul>
-    <% }; %> -->
   </body>
 </html>
