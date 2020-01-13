@@ -34,10 +34,12 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
+const resourceRoutes = require("./routes/resources");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
+app.use("/resources", resourceRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -47,17 +49,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// app.get("/resource/:id", (req, res) => {
-//   db.query(`SELECT * FROM resources WHERE resource.id = ${example};`)
-//     .then(data => {
-//       const users = data.rows;
-//       res.render('resources', { users });
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.redirect('/');
-//     });
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
