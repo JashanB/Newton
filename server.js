@@ -46,10 +46,52 @@ app.use("/resources", resourceRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  db.query(`SELECT * FROM resources ORDER BY avg(ratings.id);`)
+  .then(data => {
+    const users = data.rows;
+    res.render('index', { users });
+  })
+  .catch(err => {
+    console.error(err);
+    // res.redirect('/');
+  });
+  // res.render("index", { fakeObjectFromDB: {
+  //   title: 'Hello World 2.0'
+  // }});
+});
+app.get("/search", param, (req, res) => {
+  //pass in params inputed from search to db query
+  //allow multiple search terms?
+  db.query(`SELECT * FROM resources WHERE topics.name LIKE $1 ORDER BY avg(ratings.id);`)
+  .then(data => {
+    const users = data.rows;
+    res.render('index', { users });
+  })
+  .catch(err => {
+    console.error(err);
+    // res.redirect('/');
+  });
+  // res.render("index", { fakeObjectFromDB: {
+  //   title: 'Hello World 2.0'
+  // }});
 });
 
+app.get("/most_recent", (req, res) => {
+  db.query(`SELECT * FROM resources ORDER BY resources.created_at DESC;`)
+  .then(data => {
+    const users = data.rows;
+    res.render('index', { users });
+  })
+  .catch(err => {
+    console.error(err);
+    // res.redirect('/');
+  });
+  // res.render("index", { fakeObjectFromDB: {
+  //   title: 'Hello World 2.0'
+  // }});
+});
 
+//for most pop most recent, either add new page for most recent or load home page with params and set default to false so it loads on demand
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
