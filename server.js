@@ -44,19 +44,23 @@ app.use(cookieSession({
 const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
 const signUpRoutes = require("./routes/signup");
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(database));
 app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
+app.use("/login", loginRoutes(database));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  let user = ""
+  const templateVars = { user }
+  res.render("index", templateVars );
 });
 
 

@@ -6,8 +6,62 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Sign Up</title>
   </head>
+  <header>
+</header>
   <body>
-    <!-- Import header partial -->
-    <%- include('./partials/_header') %>
+    <form method="POST" action="/signup">
+      <label for="lgFormGroupInput" style="margin: 0cm 1em">Enter email to sign up:</label>
+      <input type="email" name="email" placeholder="example@email.com" style="width: 300px; margin: 1em">
+      <button type="submit" style="width: 4.5cm; margin: 0cm 1em" class="btn btn-info">Sign up</button>
+
+      <ul>
+        <li>
+          <label for="topic-select-1">Choose your first topic:</label>
+          <select name="topics1" id="topic-select-1">
+            <option value="">--Please choose an option--</option>
+            <%for (let topic of topics) { %>
+              <option value="<%= topic.id %>"> <%= topic.name %></option>
+          <% } %>
+          </select>
+        </li>
+        <li>
+          <label for="topic-select-2">Choose your second topic:</label>
+          <select name="topics2" id="topic-select-2">
+            <option value="">--Please choose an option--</option>
+            <%for (let topic of topics) { %>
+              <option value="<%= topic.id %>"> <%= topic.name %></option>
+          <% } %>
+          </select>
+        </li>
+        <li>
+          <label for="topic-select-3">Choose your third topic:</label>
+          <select name="topics3" id="topic-select-3">
+            <option value="">--Please choose an option--</option>
+            <%for (let topic of topics) { %>
+              <option value="<%= topic.id %>"> <%= topic.name %></option>
+          <% } %>
+          </select>
+        </li>
+      </ul>
+    </form>
   </body>
 </html>
+
+ <!-- <select>
+      <option value="books">Books</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="php">PHP</option>
+      <option value="js">JavaScript</option>
+    </select> -->
+    <!-- <label for="pet-select">Choose a pet:</label>
+
+    <select name="pets" id="pet-select">
+        <option value="">--Please choose an option--</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+        <option value="parrot">Parrot</option>
+        <option value="spider">Spider</option>
+        <option value="goldfish">Goldfish</option>
+    </select> -->

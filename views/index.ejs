@@ -10,7 +10,16 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-
+  <header>
+    <nav>
+      <% if (user) { %>
+        <span><%= user.email %></span>
+      <% } else { %>
+        <a class="nav-item nav-link" style="margin: 0cm 1em" href="/login">Click here to login</a>
+        <a class="nav-item nav-link" style="margin: 0cm 1em" href="/signup">Click here to sign up</a>
+      <% } %>
+    </nav>
+  </header>
   <body>
     <h1>Hello World</h1>
   </body>
