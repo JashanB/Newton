@@ -14,9 +14,6 @@ module.exports = (db) => {
   //   res.render('../views/resources', { resource })
   // })
 
-
-
-
   router.get("/:id", (req, res) => {
     console.log(req.params.id)
     db.query(`SELECT resources.*, comments.*, count(likes.id) as likes FROM resources
@@ -25,8 +22,8 @@ module.exports = (db) => {
               WHERE resources.id = $1
               GROUP BY resources.id, comments.id;`, [req.params.id])
       .then(data => {
-        console.log(data)
-        const resource = data
+        console.log('DATATATATA',data.rows[0])
+        const resource = data.rows[0]
         res.render('../views/resources', { resource })
       })
       .catch(err => {
