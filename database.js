@@ -23,6 +23,3 @@ const resourceInfo = (id) => {
 }
 exports.getResources = getResources;
 exports.resourceInfo = resourceInfo;
-
-
-
