@@ -8,9 +8,10 @@ module.exports = (db) => {
     console.log(req.params.id)
     db.resourceInfo(req.params.id)
       .then(data => {
-        const resource = data
-        console.log('DATA', data)
-        res.render('../views/resources', { resource })
+        const resource = data[0]
+        const comments = data
+        console.log('COMENTS', comments)
+        res.render('../views/resources', { resource, comments })
       })
       .catch(err => {
         res
@@ -20,3 +21,4 @@ module.exports = (db) => {
   });
   return router;
 };
+

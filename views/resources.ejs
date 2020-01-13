@@ -53,16 +53,19 @@
       <p class="resource-desciption"><%= resource.description %></p>
 
     <section class="resource-comemnts">
-      <article class="comment">
-        <header>
-          <h1>UserName</h1>
-          <h4>created_at</h4>
-        </header>
 
-        <body>
-          <p>Narwhal cornhole organic kickstarter prism pop-up. Green juice pug flannel forage, 90's cardigan narwhal helvetica bespoke leggings sartorial microdosing four dollar toast.</p>
-        </body>
+
+      <% for(const comment in comments) { %>
+      <article>
+        <header>
+          <h1><%= comments[comment].comment_user %></h1>
+          <h2><%= comments[comment].comments_date %></h2>
+        </header>
+        <section>
+          <p><%= comments[comment].comment_text %></p>
+        </section>
       </article>
+      <% } %>
 
   </body>
 </html>
