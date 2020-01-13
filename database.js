@@ -52,6 +52,26 @@ const addUser =  function(email) {
      })
  }
  exports.addUser = addUser;
+const getResources = function () {
+  return db.query(`SELECT * FROM resources`)
+    .then(data => {
+      return data.rows;
+    });
+}
+
+//populate resource page
+const resourceInfo = (id) => {
+  return db.query(`SELECT resources.*, comments.*, count(likes.id) as likes FROM resources
+                  LEFT JOIN likes ON likes.resource_id = resources.id
+                  LEFT JOIN comments ON comments.resource_id = resources.id
+                  WHERE resources.id = $1
+                  GROUP BY resources.id, comments.id;`, [id])
+    .then(data => {
+      return data.rows[0];
+    });
+
+}
+exports.resourceInfo = resourceInfo;
 
 
 //grabbing topic choices for sign up and upload page
@@ -66,6 +86,7 @@ const getAllTopics = function() {
 }
 exports.getAllTopics = getAllTopics;
 
+
 const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
   return db.query(
     ` INSERT INTO user_topics (user_id, topic_id)
@@ -79,3 +100,6 @@ const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
 }
 
 exports.addTopicsToUser = addTopicsToUser;
+
+
+
