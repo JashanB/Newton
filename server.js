@@ -6,6 +6,7 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
@@ -30,6 +31,12 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.use(cookieSession({
+  name: 'session',
+  secret: 'midterm',
+  // Cookie Options
+  maxAge: 5 * 60 * 1000 // 5 minutes
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -76,6 +83,7 @@ app.get("/search", param, (req, res) => {
   // }});
 });
 
+<<<<<<< HEAD
 app.get("/most_recent", (req, res) => {
   db.query(`SELECT * FROM resources ORDER BY resources.created_at DESC;`)
   .then(data => {
@@ -90,6 +98,13 @@ app.get("/most_recent", (req, res) => {
   //   title: 'Hello World 2.0'
   // }});
 });
+=======
+app.get("/signup", (req,res) => {
+  res.render("signup");
+})
+
+// res.render('_register', templateVars);
+>>>>>>> fb5d1baf37aa8133616be8dfc11350fd66f89edc
 
 //for most pop most recent, either add new page for most recent or load home page with params and set default to false so it loads on demand
 app.listen(PORT, () => {
