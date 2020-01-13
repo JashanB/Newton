@@ -44,64 +44,20 @@ app.use(cookieSession({
 const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
 const signUpRoutes = require("./routes/signup");
+const homepageRoutes = require("./routes/homepage")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(database));
 app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
+app.use("/", homepageRoutes(database));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  db.query(`SELECT * FROM resources ORDER BY avg(ratings.id);`)
-  .then(data => {
-    const users = data.rows;
-    res.render('index', { users });
-  })
-  .catch(err => {
-    console.error(err);
-    // res.redirect('/');
-  });
-  // res.render("index", { fakeObjectFromDB: {
-  //   title: 'Hello World 2.0'
-  // }});
-  res.render('index')
-});
-app.get("/search", (req, res) => {
-  //pass in params inputed from search to db query
-  //allow multiple search terms?
-  db.query(`SELECT * FROM resources WHERE topics.name LIKE $1 ORDER BY avg(ratings.id);`)
-  .then(data => {
-    const users = data.rows;
-    // res.render('index', { users });
-    res.render('index');
-  })
-  .catch(err => {
-    console.error(err);
-    // res.redirect('/');
-  });
-  // res.render("index", { fakeObjectFromDB: {
-  //   title: 'Hello World 2.0'
-  // }});
-});
-
-app.get("/mostrecent", (req, res) => {
-  db.query(`SELECT * FROM resources ORDER BY created_at DESC;`)
-  .then(data => {
-    const users = data.rows;
-    res.render('index', { users });
-    res.render('/mostrecent')
-  })
-  .catch(err => {
-    console.error(err);
-  });
-});
-
-
-// res.render('_register', templateVars);
 
 //for most pop most recent, either add new page for most recent or load home page with params and set default to false so it loads on demand
 app.listen(PORT, () => {
