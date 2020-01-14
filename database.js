@@ -129,8 +129,9 @@ const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
 const getAllMyLikedResources = function(userId) {
   return db.query(
     `SELECT resources.*
-    JOIN likes ON likes.user_id = $1
-    JOIN resources ON likes.resource_id = resources.id
+    FROM resources
+    JOIN like ON likes.resource_id = resources.id
+    WHERE likes.user_id = $1
      `, [userId])
      .then( res => {
     return res.rows;
@@ -161,3 +162,11 @@ exports.getAllMyUploadedResources = getAllMyUploadedResources
 
 
 
+
+const getResourcesByTopic = function(id) {
+  return db.query(
+    `SELECT resources.*
+    FROM users_topics users_topics.user_id = $1
+  `
+  )
+}
