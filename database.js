@@ -210,7 +210,7 @@ const getResourcesByTopicName = function(topicName) {
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
     JOIN resources ON topics_resources.resource_id = resources.id
-    WHERE topics.name LIKE '%$1%';
+    WHERE topics.name LIKE $1;
   `, [topicName])
   .then(function(data) {
     return data.rows;

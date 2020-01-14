@@ -19,8 +19,8 @@ router.post("/search", (req, res) => {
   console.log(req.body)
   db.getResourcesByTopicName(topicName)
   .then(data => {
-    const resource = {data:data};
-    res.render('index', { resource });
+    // const resource = {data:data};
+    // res.render('index', { resource });
   })
   .catch(err => {
     console.error(err);
