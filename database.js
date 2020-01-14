@@ -211,19 +211,18 @@ const insertIntoLikes = function(userid, resourceid) {
   .then(function(res) {
     console.log(res.rows)
   })
-}
+};
 
 const getResourcesByTopicName = function(topicName) {
-  return db.query(
-    `SELECT resources.*
+  return db.query(`SELECT resources.*
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
     JOIN resources ON topics_resources.resource_id = resources.id
-    WHERE topics.name LIKE $1;
+    WHERE topics.name LIKE '%' || $1 || '%';
   `, [topicName])
-  .then(function(data) {
+  .then(data => {
     return data.rows;
-  })
+  });
 }
 
 exports.getResourcesByTopicName = getResourcesByTopicName;
@@ -242,4 +241,8 @@ exports.resourceInfo = resourceInfo;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
 exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
 exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+<<<<<<< HEAD
 exports.updateUserEmail = updateUserEmail
+=======
+exports.insertIntoLikes = insertIntoLikes;
+>>>>>>> d24c84fafa3119b63595d106e6215097b910bc9d

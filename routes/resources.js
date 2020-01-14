@@ -62,6 +62,22 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post('/like/:resourceid', (req, res) => {
+    //want resource that user liekd to be inserted into likes table with user id and resource id
+    const userId = parseInt(req.params.user_id);
+    const resourceId = req.params.id;
+    //if
+    db.insertIntoLikes(userId, resourceId)
+    .then(data => {
+      res.redirect('/resources/:id');
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send(err.stack)
+    });
+  });
+
   return router;
 };
 
