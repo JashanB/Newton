@@ -13,27 +13,25 @@ router.get("/", (req, res) => {
   });
   // res.render('index')
 });
-router.get("/search", (req, res) => {
-  //pass in params inputed from search to db query
-  //allow multiple search terms?
-  db.getResourcesByTopics()
+
+router.post("/search", (req, res) => {
+  const topicName = req.body.search;
+  console.log(req.body)
+  db.getResourcesByTopicName(topicName)
   .then(data => {
-    const users = data.rows;
-    // res.render('index', { users });
-    res.render('index');
+    const resource = {data:data};
+    res.render('index', { resource });
   })
   .catch(err => {
     console.error(err);
   });
-  res.render('index');
 });
 
 // router.get("/mostrecent", (req, res) => {
 //   db.getResourcesByCreatedAt()
 //   .then(data => {
-//     const users = data.rows;
-//     res.render('index', { users });
-//     res.render('/mostrecent')
+//     const resource = {data:data};
+//     res.render('mostrecent', { resource });
 //   })
 //   .catch(err => {
 //     console.error(err);
@@ -44,7 +42,7 @@ router.get("/signup", (req,res) => {
   res.render("signup");
 })
 
-router.get("/:userid", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   db.getResourcesByTopicsForUser(id)
   .then(data => {
@@ -58,3 +56,8 @@ router.get("/:userid", (req, res) => {
 });
 return router;
 };
+
+router.post('/like/resource_id/user_id', (req, res) => {
+  //want resource that user liekd to be inserted into likes table with user id and resource id
+
+});

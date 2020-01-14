@@ -55,9 +55,10 @@ const profileRoutes = require("./routes/profile");
 // Note: Feel free to replace the example routes below with your own
 app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
-app.use("/", homepageRoutes(database));
 app.use("/login", loginRoutes(database));
 app.use("/profile", profileRoutes(database));
+app.use("/", homepageRoutes(database));
+
 
 
 app.listen(PORT, () => {

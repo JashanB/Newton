@@ -10,17 +10,24 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/resourceLoad.js"></script>
+  <style>
+      resource-box {
+       background-color: rgb(213, 213, 213);
+       width: 2em;
+       height: 2em
+      }
+
+     </style>
 </head>
 <%- include('./partials/_header') %>
 <body>
   <h1></h1>
   <div class="wrap">
     <div class="search">
-       <input type="text" class="searchTerm" placeholder="What are you looking for?">
-       <button method="GET" action='/search'type="submit" class="searchButton">
-         <i class="fa fa-search"></i>
-      </button>
+      <form class="search-bar" method="POST" action="/search">
+        <input type="text" placeholder="Search" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
     </div>
     <div class="filter">
         <form method="GET" action='/mostrecent'><button class="submit">Most Recent</button>
@@ -31,14 +38,11 @@
   <% for (let i = 0; i < resource.data.length; i++) { %>
     <div class="resource-box">
          <span class="resource-title"><%= resource.data[i].title %></span>
-         <img src="<%=resource.data[i].image_url%>"/>
+         <img class="resource-img" src=<%= resource.data[i].image_url %> />
          <form method="POST" action='/like'><button class="submit">Like</button></form>
     </div>
   <% } %>
 </section>
 </body>
 
-  <body>
-    <h1>Hello World</h1>
-  </body>
 </html>

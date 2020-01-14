@@ -62,6 +62,7 @@ const getResources = function () {
 const getResourcesOrderByCountRating = function() {
   return db.query(`SELECT * FROM resources
   JOIN ratings ON ratings.resource_id = resources.id
+  WHERE resources.is_deleted = FALSE
   GROUP BY resources.id, ratings.id
   ORDER BY count(ratings.id)
   LIMIT 40;`)
@@ -72,18 +73,13 @@ const getResourcesOrderByCountRating = function() {
 
 const getResourcesByTopicsForUser = function(id) {
   return db.query(`SELECT resources.*
-  FROM topics
-  LEFT JOIN user_topics ON topics.id = user_topics.topic_id
-  JOIN users ON user_topics.user_id = users.id
-  JOIN topics_resources ON topics_resources.topic_id = topics.id
-  JOIN resources ON resources.id = topics_resources.resource_id
-  JOIN likes ON resources.id = likes.resource_id
-  WHERE users.id = 1 AND (SELECT resources.*
-    FROM resources
+    FROM user_topics
+    JOIN topics_resources ON topics_resources.topic_id = user_topics.topic_id
+    JOIN resources ON topics_resources.resource_id = resources.id
     JOIN likes ON resources.id = likes.resource_id
-    WHERE users.id <> likes.user_id;`)
+    WHERE user_topics.user_id = $1 AND likes.user_id <> $1;
+    `, [id])
   .then(data => {
-    console.log(data.rows)
     return data.rows;
   });
 }
@@ -212,15 +208,31 @@ exports.getLikesByID  = getLikesByID;
 
 // exports.getTopicsByID = getTopicsByID;
 
+const insertIntoLikes = function(userid, resourceid) {
+  return db.query(`INSERT INTO likes (user_id, resource_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [userid, resourceid])
+  .then(function(res) {
+    console.log(res.rows)
+  })
+}
 
 
 
 
 
-const getResourcesByTopic = function(id) {
+const getResourcesByTopicName = function(topicName) {
   return db.query(
     `SELECT resources.*
-    FROM users_topics users_topics.user_id = $1
-  `
-  )
+    FROM topics
+    JOIN topics_resources ON topics_resources.topic_id = topics.id
+    JOIN resources ON topics_resources.resource_id = resources.id
+    WHERE topics.name LIKE '%$1%';
+  `, [topicName])
+  .then(function(data) {
+    return data.rows;
+  })
 }
+
+exports.getResourcesByTopicName = getResourcesByTopicName;
