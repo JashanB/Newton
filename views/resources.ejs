@@ -7,27 +7,34 @@
     <title>Reources</title>
 
     <style>
-      .resource {
+     body {
+      background-color: rgb(213, 213, 213)
+     }
+     .resource {
         margin: 0% 20% 0% 20%;
+        padding: 0 10px 0 10px;
+        background-color: white;
       }
 
       .img {
-        border: 1px black solid;
+        text-align: center;
       }
 
       .likes-ratings {
         width: fit-content;
       }
 
-      .resource-comemnts {
+
+      .comment {
         border: 1px black solid;
-        margin-top: 10px;
+        margin: 10px 0 10px 0;
+        padding: 0 5px 5px 5px;
       }
 
       .comment header {
         display: flex;
         justify-content:  space-between;
-
+        margin: 10px 0 10px 0;
       }
 
     </style>
@@ -53,16 +60,19 @@
       <p class="resource-desciption"><%= resource.description %></p>
 
     <section class="resource-comemnts">
+
+
+      <% for(const comment in comments) { %>
       <article class="comment">
         <header>
-          <h1>UserName</h1>
-          <h4>created_at</h4>
+          <h1><%= comments[comment].comment_user %></h1>
+          <h4><%= comments[comment].comments_date %></h4>
         </header>
-
-        <body>
-          <p>Narwhal cornhole organic kickstarter prism pop-up. Green juice pug flannel forage, 90's cardigan narwhal helvetica bespoke leggings sartorial microdosing four dollar toast.</p>
-        </body>
+        <section>
+          <p><%= comments[comment].comment_text %></p>
+        </section>
       </article>
+      <% } %>
 
   </body>
 </html>

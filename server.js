@@ -45,6 +45,7 @@ const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
 const signUpRoutes = require("./routes/signup");
 const homepageRoutes = require("./routes/homepage")
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -53,11 +54,20 @@ app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
 app.use("/", homepageRoutes(database));
 
+app.use("/login", loginRoutes(database));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+// app.get("/", (req, res) => {
+//   let user = ""
+//   const templateVars = { user }
+//   res.render("index", templateVars );
+// });
+
+
+// res.render('_register', templateVars);
 
 //for most pop most recent, either add new page for most recent or load home page with params and set default to false so it loads on demand
 app.listen(PORT, () => {
