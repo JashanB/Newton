@@ -10,6 +10,7 @@ const cookieSession = require('cookie-session');
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+const methodOverride = require('method-override');
 const database   = require("./database");
 
 // PG database client/connection setup
@@ -38,38 +39,27 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 5 * 60 * 1000 // 5 minutes
 }));
+app.use(methodOverride('_method'));
+
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
+
 const resourceRoutes = require("./routes/resources");
 const signUpRoutes = require("./routes/signup");
 const homepageRoutes = require("./routes/homepage")
 const loginRoutes = require("./routes/login");
+const profileRoutes = require("./routes/profile");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/users", usersRoutes(database));
 app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
 app.use("/", homepageRoutes(database));
-
 app.use("/login", loginRoutes(database));
-// Note: mount other resources here, using the same pattern above
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-// app.get("/", (req, res) => {
-//   let user = ""
-//   const templateVars = { user }
-//   res.render("index", templateVars );
-// });
+app.use("/profile", profileRoutes(database));
 
 
-// res.render('_register', templateVars);
-
-//for most pop most recent, either add new page for most recent or load home page with params and set default to false so it loads on demand
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
