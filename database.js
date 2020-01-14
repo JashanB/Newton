@@ -156,8 +156,6 @@ const getAllMyUploadedResources = function(userId) {
       });
 }
 
-
-
 //  ------  Resource id page functions  ------  //
 const getResourceByID = (id) => {
   return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
