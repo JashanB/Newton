@@ -110,10 +110,7 @@ const resourceInfo = (id) => {
     });
 
 }
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+
 
 
 
@@ -163,17 +160,6 @@ const getAllMyUploadedResources = function(userId) {
       });
 }
 
-exports.addTopicsToUser = addTopicsToUser;
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
-exports.addUser = addUser;
-exports.getAllTopics = getAllTopics;
-exports.getUserWithId = getUserWithId;
-exports.getUserWithEmail = getUserWithEmail;
-exports.getAllMyLikedResources = getAllMyLikedResources;
-exports.getAllMyUploadedResources = getAllMyUploadedResources
 
 
 //  ------  Resource id page functions  ------  //
@@ -215,4 +201,18 @@ exports.getLikesByID  = getLikesByID;
 
 
 
-
+exports.addTopicsToUser = addTopicsToUser;
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+exports.addUser = addUser;
+exports.getAllTopics = getAllTopics;
+exports.getUserWithId = getUserWithId;
+exports.getUserWithEmail = getUserWithEmail;
+exports.getAllMyLikedResources = getAllMyLikedResources;
+exports.getAllMyUploadedResources = getAllMyUploadedResources
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
