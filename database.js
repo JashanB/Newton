@@ -19,7 +19,7 @@ const getUserWithEmail = function(email) {
     return user;
   })
 }
-exports.getUserWithEmail = getUserWithEmail;
+
 
 
 const getUserWithId = function(id) {
@@ -36,7 +36,7 @@ const getUserWithId = function(id) {
      return user;
    })
  }
-exports.getUserWithId = getUserWithId;
+
 
 
 //adding a user to database
@@ -51,7 +51,7 @@ const addUser =  function(email) {
       return res.rows[0];
      })
  }
- exports.addUser = addUser;
+
 const getResources = function () {
   return db.query(`SELECT * FROM resources WHERE resources.id = 1;`)
     .then(data => {
@@ -99,14 +99,10 @@ const resourceInfo = (id) => {
     });
 
 }
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopics = getResourcesByTopics;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+
 
 
 //grabbing topic choices for sign up and upload page
-
 const getAllTopics = function() {
   return db.query(
     `SELECT topics.id, topics.name
@@ -115,9 +111,9 @@ const getAllTopics = function() {
     return res.rows;
   })
 }
-exports.getAllTopics = getAllTopics;
 
 
+//connecting topics to user upon signin
 const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
   return db.query(
     ` INSERT INTO user_topics (user_id, topic_id)
@@ -130,7 +126,86 @@ const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
      })
 }
 
+const getAllMyLikedResources = function(userId) {
+  return db.query(
+    `SELECT resources.*
+    FROM resources
+    JOIN like ON likes.resource_id = resources.id
+    WHERE likes.user_id = $1
+     `, [userId])
+     .then( res => {
+    return res.rows;
+    });
+}
+
+const getAllMyUploadedResources = function(userId) {
+  return db.query(
+    `SELECT resources.*
+    FROM resources
+    WHERE resources.created_by = $1`, [userId])
+    .then( res => {
+      return res.rows;
+      });
+}
+
 exports.addTopicsToUser = addTopicsToUser;
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopics = getResourcesByTopics;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+exports.addUser = addUser;
+exports.getAllTopics = getAllTopics;
+exports.getUserWithId = getUserWithId;
+exports.getUserWithEmail = getUserWithEmail;
+exports.getAllMyLikedResources = getAllMyLikedResources;
+exports.getAllMyUploadedResources = getAllMyUploadedResources
+
+
+//  ------  Resource id page functions  ------  //
+const getResourceByID = (id) => {
+  return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
+    .then(function(data) {
+      return data.rows;
+    })
+}
+exports.getResourceByID = getResourceByID;
+
+const getCommentsByID = (id) => {
+  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1`, [id])
+}
+
+exports.getCommentsByID = getCommentsByID;
+
+const getRatingByID = (id) => {
+  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = 2)FROM ratings WHERE ratings.resource_id = $1
+                  GROUP BY ratings.id`, [id])
+}
+
+exports.getRatingByID  = getRatingByID;
+
+const getLikesByID = (id) => {
+  return db.query(`SELECT likes.* , (SELECT count(likes.id) FROM likes WHERE likes.resource_id = 2)FROM likes WHERE likes.resource_id = $1
+                  GROUP BY likes.id`, [id])
+}
+
+exports.getLikesByID  = getLikesByID;
+
+// const getTopicsByID = (id) => {
+//   return db.query(`SELECT likes.* FROM likes WHERE likes.resource_id = $1
+//                   GROUP BY likes.id`, [id])
+// }
+
+// exports.getTopicsByID = getTopicsByID;
 
 
 
+
+
+
+const getResourcesByTopic = function(id) {
+  return db.query(
+    `SELECT resources.*
+    FROM users_topics users_topics.user_id = $1
+  `
+  )
+}

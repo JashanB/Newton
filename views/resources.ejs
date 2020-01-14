@@ -48,28 +48,28 @@
     <section class="resource">
 
       <div class="img">
-        <img class="resource-img" src=<%= resource.img_url %> />
+        <img class="resource-img" src=<%= resources.resourceInfo[0].img_url %> />
       </div>
 
       <section class="likes-ratings">
-        RATING: <%= resource.rating %> LIKE <%= resource.likes %>
+        RATING: <%= resources.ratings[0].count %> LIKE <%= resources.likes[0].count %>
       </section>
 
-      <a href=<%= resource.url %>>Link</a>
+      <a href=<%= resources.resourceInfo[0].img_url %>>Link</a>
 
-      <p class="resource-desciption"><%= resource.description %></p>
+      <p class="resource-desciption"><%= resources.resourceInfo[0].description %></p>
 
     <section class="resource-comemnts">
 
 
-      <% for(const comment in comments) { %>
+      <% for(const comment in resources.comments) { %>
       <article class="comment">
         <header>
-          <h1><%= comments[comment].comment_user %></h1>
-          <h4><%= comments[comment].comments_date %></h4>
+          <h1><%= resources.comments[comment].user_id %></h1>
+          <h4><%= resources.comments[comment].created_at %></h4>
         </header>
         <section>
-          <p><%= comments[comment].comment_text %></p>
+          <p><%= resources.comments[comment].text %></p>
         </section>
       </article>
       <% } %>
