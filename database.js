@@ -70,9 +70,20 @@ const getResourcesOrderByCountRating = function() {
   });
 }
 
-const getResourcesByTopics = function() {
-  return db.query(`SELECT * FROM resources WHERE topics.name LIKE $1 ORDER BY avg(ratings.id);`)
+const getResourcesByTopicsForUser = function(id) {
+  return db.query(`SELECT resources.*
+  FROM topics
+  LEFT JOIN user_topics ON topics.id = user_topics.topic_id
+  JOIN users ON user_topics.user_id = users.id
+  JOIN topics_resources ON topics_resources.topic_id = topics.id
+  JOIN resources ON resources.id = topics_resources.resource_id
+  JOIN likes ON resources.id = likes.resource_id
+  WHERE users.id = 1 AND (SELECT resources.*
+    FROM resources
+    JOIN likes ON resources.id = likes.resource_id
+    WHERE users.id <> likes.user_id;`)
   .then(data => {
+    console.log(data.rows)
     return data.rows;
   });
 }
@@ -99,6 +110,10 @@ const resourceInfo = (id) => {
     });
 
 }
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
 
 
 
@@ -151,7 +166,7 @@ const getAllMyUploadedResources = function(userId) {
 exports.addTopicsToUser = addTopicsToUser;
 exports.resourceInfo = resourceInfo;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopics = getResourcesByTopics;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
 exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
 exports.addUser = addUser;
 exports.getAllTopics = getAllTopics;
