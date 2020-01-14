@@ -43,7 +43,7 @@ module.exports = (db) => {
   })
 
   router.get("/:user_id", (req, res) => {
-    const id = req.params.user_id;
+    const id = req.session.user_id;
     if (id) {
       let userId = parseInt(req.params.user_id);
       if (id === userId) {
