@@ -33,13 +33,25 @@
         <form method="GET" action='/mostrecent'><button class="submit">Most Recent</button>
           <!-- make into drop down list for filter -->
      </div>
+     <div class="myresources">
+        <form method="GET" action='/myresources'><button class="submit">Most Recent</button>
+          <!-- make into drop down list for filter -->
+     </div>
+     <div class="profile">
+        <form method="GET" action='/profile'><button class="submit">Most Recent</button>
+          <!-- make into drop down list for filter -->
+     </div>
   </div>
 <section id="resource-container">
   <% for (let i = 0; i < resource.data.length; i++) { %>
     <div class="resource-box">
          <span class="resource-title"><%= resource.data[i].title %></span>
          <img class="resource-img" src=<%= resource.data[i].image_url %> />
-         <form method="POST" action='/like'><button class="submit">Like</button></form>
+         <% if (resource.userId) { %>
+         <form method="POST" action='/resources/like/<%=resource.data[i].id%>/'><button class="submit">Like</button></form>
+         <% } else { %>
+        <form method="POST" action='/resources/like/<%=resource.data[i].id%>/'><button class="submit">Like</button></form>
+        <% } %>
     </div>
   <% } %>
 </section>

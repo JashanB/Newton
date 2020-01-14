@@ -11,7 +11,6 @@ module.exports = (db) => {
       .catch(err => {
         console.error(err);
       });
-    // res.render('index')
   });
 
   router.post("/search", (req, res) => {
@@ -19,11 +18,12 @@ module.exports = (db) => {
     console.log(req.body)
     db.getResourcesByTopicName(topicName)
       .then(data => {
-        // const resource = {data:data};
-        // res.render('index', { resource });
+        const resource = {data:data};
+        res.render('index', { resource });
       })
       .catch(err => {
         console.error(err);
+        res.status(500).send(err.stack)
       });
   });
 
@@ -49,7 +49,7 @@ module.exports = (db) => {
       if (id === userId) {
         db.getResourcesByTopicsForUser(id)
           .then(data => {
-            const resource = { data: data };
+            const resource = { data: data, userId: userId };
             res.render('index', { resource });
           })
           .catch(err => {
