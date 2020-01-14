@@ -216,11 +216,3 @@ exports.getLikesByID  = getLikesByID;
 
 
 
-
-const getResourcesByTopic = function(id) {
-  return db.query(
-    `SELECT resources.*
-    FROM users_topics users_topics.user_id = $1
-  `
-  )
-}
