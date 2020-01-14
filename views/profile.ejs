@@ -8,7 +8,17 @@
   </head>
   <body>
     <h1>Profile</h1>
-    <p>update email, will be an app.put</p>
+    <form id="updateEmail" action="/profile?_method=PUT" method="POST">
+      <label>Enter new email to update:</label>
+
+      <input type="email" name="email" placeholder="example@email.com">
+      <button type="submit">Update</button>
+  </form>
     <p>edit your topics, will be an app.delete</p>
+    <script>document.getElementById('updateEmail').addEventListener('submit', function(event) {
+      event.preventDefault()
+      console.log('it worked', this, event)
+    })
+    </script>
   </body>
 </html>

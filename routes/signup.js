@@ -10,7 +10,7 @@ module.exports = (db) => {
       return db.getUserWithId(id)
       .then ( user => {
         let templateVars = { user }
-        res.render("index", templateVars);
+        res.redirect(`/${id}`)
       });
     } else {
       return db.getAllTopics()
@@ -42,15 +42,19 @@ module.exports = (db) => {
             const user = data;
             return user;
           }).then( user => {
-            const user_id = user.id;
-            db.addTopicsToUser(user_id, topic1, topic2, topic3);
-            let templateVars = {user};
-            res.redirect("/user_id", templateVars);
+            const userId = user.id;
+            db.addTopicsToUser(userId, topic1, topic2, topic3);
+            res.redirect(`/${userId}`);
+          }).catch(err => {
+            console.log(err);
           })
         } else {
           //email in use, sends error -> later change to error on template ejs
           res.status(404).send('Status Code 404: Error: Email already in use.');
         }
+      })
+      .catch(err => {
+        console.log(err);
       });
     }
   })

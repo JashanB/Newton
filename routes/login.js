@@ -4,13 +4,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    // let id = req.session.user_id;
-    // console.log(id);
-    // if (id) {
-    //   res.redirect(`/${id}`);
-    // } else {
+    let id = req.session.user_id;
+    if (id) {
+      res.redirect(`/${id}`);
+    } else {
     res.render("login");
-    // }
+    }
   });
 
   router.post("/", (req, res) => {
@@ -23,7 +22,7 @@ module.exports = (db) => {
       .then( user => {
         if (!user) {
           //will add an error
-          res.render("signup");
+          res.redirect("/signup");
         } else {
           req.session.user_id = user.id;
           //const templateVars = { user };

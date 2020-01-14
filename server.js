@@ -50,6 +50,7 @@ const signUpRoutes = require("./routes/signup");
 const homepageRoutes = require("./routes/homepage")
 const loginRoutes = require("./routes/login");
 const profileRoutes = require("./routes/profile");
+const myResourcesRoutes = require("./routes/myResources");
 
 // CSS Links
 app.use("/styles",express.static(__dirname + "/styles"));
@@ -60,6 +61,7 @@ app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
 app.use("/login", loginRoutes(database));
 app.use("/profile", profileRoutes(database));
+app.use("/myresources", myResourcesRoutes(database));
 app.use("/", homepageRoutes(database));
 
 app.listen(PORT, () => {
