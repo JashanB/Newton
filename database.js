@@ -241,8 +241,5 @@ exports.resourceInfo = resourceInfo;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
 exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
 exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
-<<<<<<< HEAD
-exports.updateUserEmail = updateUserEmail
-=======
 exports.insertIntoLikes = insertIntoLikes;
->>>>>>> d24c84fafa3119b63595d106e6215097b910bc9d
+exports.updateUserEmail = updateUserEmail
