@@ -9,14 +9,13 @@ module.exports = (db) => {
     if (id) {
       return db.getUserWithId(id)
       .then ( user => {
-        templateVars = { user }
+        let templateVars = { user }
         res.render("index", templateVars);
       });
     } else {
       return db.getAllTopics()
       .then(topics => {
-        templateVars = { topics }
-        console.log(topics);
+        let templateVars = { topics }
         res.render("signup", templateVars);
       })
     }
@@ -45,8 +44,8 @@ module.exports = (db) => {
           }).then( user => {
             const user_id = user.id;
             db.addTopicsToUser(user_id, topic1, topic2, topic3);
-            let templateVars = {user, topic1, topic2, topic3};
-            res.render("index", templateVars)
+            let templateVars = {user};
+            res.redirect("index/user_id", templateVars);
           })
         } else {
           //email in use, sends error -> later change to error on template ejs
