@@ -45,7 +45,7 @@ module.exports = (db) => {
             const user_id = user.id;
             db.addTopicsToUser(user_id, topic1, topic2, topic3);
             let templateVars = {user};
-            res.redirect("index/user_id", templateVars);
+            res.redirect("/user_id", templateVars);
           })
         } else {
           //email in use, sends error -> later change to error on template ejs

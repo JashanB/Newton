@@ -6,16 +6,9 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     let id = req.session.user_id;
     if (id) {
-      //want to redirect to homepage if already logged in
-      return db.getUserWithId(id)
-      .then ( user => {
-        templateVars = { user }
-        res.render("index", templateVars);
-      });
+      res.redirect(`/${id}`);
     } else {
-      let user = '';
-      const templateVars = { user }
-      res.render("login", templateVars);
+      res.render("login");
     }
   });
 
@@ -31,11 +24,10 @@ module.exports = (db) => {
           //will add an error
           res.render("signup");
         } else {
-          console.log(user);
           req.session.user_id = user.id;
-          const templateVars = { user };
-          //want to send to home but now logged in
-          res.render("index", templateVars);
+          //const templateVars = { user };
+          //want to send to home/userid
+          res.redirect(`/${user.id}`);
         }
       })
 
