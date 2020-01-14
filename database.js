@@ -70,7 +70,7 @@ const getResourcesOrderByCountRating = function() {
   });
 }
 
-const getResourcesByTopics = function() {
+const getResourcesByTopics = function(id) {
   return db.query(`SELECT * FROM resources WHERE topics.name LIKE $1 ORDER BY avg(ratings.id);`)
   .then(data => {
     return data.rows;

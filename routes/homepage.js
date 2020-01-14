@@ -43,5 +43,19 @@ router.get("/mostrecent", (req, res) => {
 router.get("/signup", (req,res) => {
   res.render("signup");
 })
+
+router.get("/:user_id", (req, res) => {
+  console.log(req.params.id);
+  const id = req.params.id;
+  db.getResourcesByTopics(id)
+  .then(data => {
+    const resource = {data:data};
+    res.render('index', { resource });
+  })
+  .catch(err => {
+    console.error(err);
+  });
+  // res.render('index')
+});
 return router;
 };
