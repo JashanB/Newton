@@ -51,6 +51,9 @@ const homepageRoutes = require("./routes/homepage")
 const loginRoutes = require("./routes/login");
 const profileRoutes = require("./routes/profile");
 
+// CSS Links
+app.use("/styles",express.static(__dirname + "/styles"));
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/resources", resourceRoutes(database));
