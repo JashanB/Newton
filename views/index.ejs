@@ -48,9 +48,9 @@
          <span class="resource-title"><%= resource.data[i].title %></span>
          <img class="resource-img" src=<%= resource.data[i].image_url %> />
          <% if (resource.userId) { %>
-         <form method="POST" action='/resources/like/<%=resource.data[i].id%>/'><button class="submit">Like</button></form>
+         <form method="POST" action="/resources/like/<%=resource.data[i].id%>?_method=PUT"><button class="submit">Like</button></form>
          <% } else { %>
-        <form method="POST" action='/resources/like/<%=resource.data[i].id%>/'><button class="submit">Like</button></form>
+        <form method="GET" action="/login"><button class="submit">Like</button></form>
         <% } %>
     </div>
   <% } %>
