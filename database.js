@@ -106,10 +106,7 @@ const resourceInfo = (id) => {
     });
 
 }
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+
 
 
 
@@ -159,17 +156,6 @@ const getAllMyUploadedResources = function(userId) {
       });
 }
 
-exports.addTopicsToUser = addTopicsToUser;
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
-exports.addUser = addUser;
-exports.getAllTopics = getAllTopics;
-exports.getUserWithId = getUserWithId;
-exports.getUserWithEmail = getUserWithEmail;
-exports.getAllMyLikedResources = getAllMyLikedResources;
-exports.getAllMyUploadedResources = getAllMyUploadedResources;
 
 
 //  ------  Resource id page functions  ------  //
@@ -218,10 +204,6 @@ const insertIntoLikes = function(userid, resourceid) {
   })
 }
 
-
-
-
-
 const getResourcesByTopicName = function(topicName) {
   return db.query(
     `SELECT resources.*
@@ -236,3 +218,18 @@ const getResourcesByTopicName = function(topicName) {
 }
 
 exports.getResourcesByTopicName = getResourcesByTopicName;
+exports.addTopicsToUser = addTopicsToUser;
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+exports.addUser = addUser;
+exports.getAllTopics = getAllTopics;
+exports.getUserWithId = getUserWithId;
+exports.getUserWithEmail = getUserWithEmail;
+exports.getAllMyLikedResources = getAllMyLikedResources;
+exports.getAllMyUploadedResources = getAllMyUploadedResources
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
