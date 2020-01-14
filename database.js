@@ -171,7 +171,8 @@ const getAllMyUploadedResources = function(userId) {
 const getResourceByID = (id) => {
   return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
     .then(function(data) {
-      return data.rows;
+      console.log('GET REOURCE BY ID',data.rows)
+      return data.rows[0];
     })
 }
 exports.getResourceByID = getResourceByID;
@@ -195,6 +196,15 @@ const getLikesByID = (id) => {
 }
 
 exports.getLikesByID  = getLikesByID;
+
+const postComment = (resource_id) => {
+  return db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values (235, 239, 'mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', '1/25/2012'`);
+
+}
+
+exports.getLikesByID  = getLikesByID;
+
+
 
 // const getTopicsByID = (id) => {
 //   return db.query(`SELECT likes.* FROM likes WHERE likes.resource_id = $1
