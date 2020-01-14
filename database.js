@@ -176,6 +176,45 @@ exports.getAllMyLikedResources = getAllMyLikedResources;
 exports.getAllMyUploadedResources = getAllMyUploadedResources
 
 
+//  ------  Resource id page functions  ------  //
+const getResourceByID = (id) => {
+  return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
+    .then(function(data) {
+      return data.rows;
+    })
+}
+exports.getResourceByID = getResourceByID;
+
+const getCommentsByID = (id) => {
+  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1`, [id])
+}
+
+exports.getCommentsByID = getCommentsByID;
+
+const getRatingByID = (id) => {
+  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = 2)FROM ratings WHERE ratings.resource_id = $1
+                  GROUP BY ratings.id`, [id])
+}
+
+exports.getRatingByID  = getRatingByID;
+
+const getLikesByID = (id) => {
+  return db.query(`SELECT likes.* , (SELECT count(likes.id) FROM likes WHERE likes.resource_id = 2)FROM likes WHERE likes.resource_id = $1
+                  GROUP BY likes.id`, [id])
+}
+
+exports.getLikesByID  = getLikesByID;
+
+// const getTopicsByID = (id) => {
+//   return db.query(`SELECT likes.* FROM likes WHERE likes.resource_id = $1
+//                   GROUP BY likes.id`, [id])
+// }
+
+// exports.getTopicsByID = getTopicsByID;
+
+
+
+
 
 
 const getResourcesByTopic = function(id) {
