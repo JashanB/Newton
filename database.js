@@ -145,7 +145,7 @@ const getAllMyLikedResources = function(userId) {
   return db.query(
     `SELECT resources.*
     FROM resources
-    JOIN like ON likes.resource_id = resources.id
+    JOIN likes ON likes.resource_id = resources.id
     WHERE likes.user_id = $1
      `, [userId])
      .then( res => {

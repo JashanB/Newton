@@ -5,6 +5,7 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     let id = req.session.user_id;
+    console.log(id);
     if (id) {
       res.redirect(`/${id}`);
     } else {
