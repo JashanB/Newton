@@ -79,9 +79,8 @@ module.exports = (db) => {
     });
   });
 
-  router.post("/comment/:id", (req, res) => {
-    db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values (235, 239, 'mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', '1/25/2012'`);
-
+  router.put("/comment/:id", (req, res) => {
+    console.log('REQ', req.body.comment);
   });
 
 

@@ -197,12 +197,11 @@ const getLikesByID = (id) => {
 
 exports.getLikesByID  = getLikesByID;
 
-const postComment = (resource_id) => {
-  return db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values (235, 239, 'mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', '1/25/2012'`);
-
+const postComment = (resource_id, user_id, text) => {
+  return db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values ($1, $2, $3`, [resource_id, user_id, text]);
 }
 
-exports.getLikesByID  = getLikesByID;
+exports.postComment  = postComment;
 
 
 
