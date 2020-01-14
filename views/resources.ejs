@@ -4,44 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link href="/styles/style.css" rel="stylesheet" type="text/css" >
+    <link href="/styles/resources.css" rel="stylesheet" type="text/css" >
+
+
     <title>Reources</title>
 
-    <style>
-     body {
-      background-color: rgb(213, 213, 213)
-     }
-     .resource {
-        margin: 0% 20% 0% 20%;
-        padding: 0 10px 0 10px;
-        background-color: white;
-      }
 
-      .img {
-        text-align: center;
-      }
-
-      .likes-ratings {
-        width: fit-content;
-      }
-
-
-      .comment {
-        border: 1px black solid;
-        margin: 10px 0 10px 0;
-        padding: 0 5px 5px 5px;
-      }
-
-      .comment header {
-        display: flex;
-        justify-content:  space-between;
-        margin: 10px 0 10px 0;
-      }
-
-    </style>
   </head>
   <body>
     <!-- Import header partial -->
-    <%- include('./partials/_header') %>
+    <%- include('./partials/_nav') %>
 
 
 
@@ -60,7 +34,9 @@
       <p class="resource-desciption"><%= resources.resourceInfo[0].description %></p>
 
     <section class="resource-comemnts">
-
+      <form action="POST">
+      Comment <input type="text" ><br>
+      </form>
 
       <% for(const comment in resources.comments) { %>
       <article class="comment">

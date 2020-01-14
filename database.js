@@ -110,10 +110,7 @@ const resourceInfo = (id) => {
     });
 
 }
-exports.resourceInfo = resourceInfo;
-exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
-exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
-exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+
 
 
 
@@ -145,7 +142,7 @@ const getAllMyLikedResources = function(userId) {
   return db.query(
     `SELECT resources.*
     FROM resources
-    JOIN like ON likes.resource_id = resources.id
+    JOIN likes ON likes.resource_id = resources.id
     WHERE likes.user_id = $1
      `, [userId])
      .then( res => {
@@ -215,12 +212,18 @@ exports.getLikesByID  = getLikesByID;
 
 
 
-
-
-const getResourcesByTopic = function(id) {
-  return db.query(
-    `SELECT resources.*
-    FROM users_topics users_topics.user_id = $1
-  `
-  )
-}
+exports.addTopicsToUser = addTopicsToUser;
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
+exports.addUser = addUser;
+exports.getAllTopics = getAllTopics;
+exports.getUserWithId = getUserWithId;
+exports.getUserWithEmail = getUserWithEmail;
+exports.getAllMyLikedResources = getAllMyLikedResources;
+exports.getAllMyUploadedResources = getAllMyUploadedResources
+exports.resourceInfo = resourceInfo;
+exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
+exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
+exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
