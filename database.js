@@ -173,7 +173,7 @@ exports.getAllTopics = getAllTopics;
 exports.getUserWithId = getUserWithId;
 exports.getUserWithEmail = getUserWithEmail;
 exports.getAllMyLikedResources = getAllMyLikedResources;
-exports.getAllMyUploadedResources = getAllMyUploadedResources
+exports.getAllMyUploadedResources = getAllMyUploadedResources;
 
 
 //  ------  Resource id page functions  ------  //
