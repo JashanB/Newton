@@ -6,13 +6,56 @@ module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
     console.log(req.params.id)
-    db.resourceInfo(req.params.id)
+    db.getResourceByID(req.params.id)
       .then(data => {
-        const resource = data[0]
-        const comments = data
-        console.log('COMENTS', comments)
-        res.render('../views/resources', { resource, comments })
+        const resourceInfo = data;
+        return db.getCommentsByID(req.params.id)
+          .then(comments => {
+            return {
+              resourceInfo: resourceInfo,
+              comments: comments.rows
+            }
+          })
+
       })
+      .then(data => {
+        return db.getRatingByID(req.params.id)
+          .then(ratings => {
+            return {
+              resourceInfo: data.resourceInfo,
+              comments: data.comments,
+              ratings: ratings.rows
+            }
+          })
+          .then(data => {
+            return db.getLikesByID(req.params.id)
+              .then(likes => {
+                return {
+                  resourceInfo: data.resourceInfo,
+                  comments: data.comments,
+                  ratings: data.ratings,
+                  likes: likes.rows
+                }
+              })
+          })
+          // .then(data => {
+          //   return db.getTopicsByID(req.params.id)
+          //     .then(topics => {
+          //       return {
+          //         resourceInfo: data.resourceInfo,
+          //         comments: data.comments,
+          //         ratings: data.ratings,
+          //         likes: data.likes,
+          //         topics: topics.rows
+          //       }
+          //     })
+          // })
+          .then(data => {
+            const resources = data
+            res.render('../views/resources', { resources })
+          })
+      })
+
       .catch(err => {
         res
           .status(500)
