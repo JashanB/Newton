@@ -8,6 +8,25 @@
   </head>
   <body>
     <h1>My Resources</h1>
-    <p>includes all my liked and uploaded resources</p>
+    <p>Liked resources</p>
+    <section id="likedResource-container">
+        <% for (let i = 0; i < resource.liked.length; i++) { %>
+          <div class="resource-box">
+               <span class="resource-title"><%= resource.liked[i].title %></span>
+               <img class="resource-img" src=<%= resource.liked[i].image_url %> />
+               <!-- click resource needs to redirect to resource page -->
+          </div>
+        <% } %>
+      </section>
+      <p>Uploaded resources</p>
+      <section id="uploadedResource-container">
+          <% for (let i = 0; i < resource.uploaded.length; i++) { %>
+            <div class="resource-box">
+                 <span class="resource-title"><%= resource.uploaded[i].title %></span>
+                 <img class="resource-img" src=<%= resource.uploaded[i].image_url %> />
+                 <!-- click resource needs to redirect to resource page -->
+            </div>
+          <% } %>
+        </section>
   </body>
 </html>

@@ -235,6 +235,20 @@ const getResourcesByTopicName = function(topicName) {
   });
 }
 
+const checkIfLiked = function(resourceId) {
+  return db.query(`SELECT *
+  FROM likes
+  WHERE likes.resource_id = $1
+  `, [resourceId])
+  .then(data => {
+    return data.rows
+  })
+}
+
+const deleteLiked = function (resourceId) {
+  return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
+}
+
 exports.getResourcesByTopicName = getResourcesByTopicName;
 exports.addTopicsToUser = addTopicsToUser;
 exports.resourceInfo = resourceInfo;
@@ -252,4 +266,6 @@ exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
 exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
 exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
 exports.insertIntoLikes = insertIntoLikes;
-exports.updateUserEmail = updateUserEmail
+exports.updateUserEmail = updateUserEmail;
+exports.checkIfLiked = checkIfLiked;
+exports.deleteLiked = deleteLiked;

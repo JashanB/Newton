@@ -37,7 +37,7 @@ app.use(cookieSession({
   name: 'session',
   secret: 'midterm',
   // Cookie Options
-  maxAge: 5 * 60 * 1000 // 5 minutes
+  maxAge: 500 * 60 * 1000 // 5 minutes
 }));
 app.use(methodOverride('_method'));
 
