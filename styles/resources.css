@@ -7,21 +7,27 @@ body {
    margin: 0% 20% 0% 20%;
    padding: 0 5% 0 5%;
    background-color: white;
-   height: 100vh
+   height: 100%
  }
 
  .img {
    text-align: center;
+   padding: 1em 0 0 0;
  }
 
- .likes-ratings {
+.likes-ratings {
   display:flex;
-  justify-content:  space-between;
+  justify-content:  flex-start;
+}
+
+
+ .likes-ratings button {
   width: fit-content;
   margin: 1em 0;
+  background-color: transparent;
+  border: none;
+  padding: 0 2em;
  }
-
-
 
  .comment {
    border: 1px black solid;

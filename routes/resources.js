@@ -5,7 +5,6 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
-    console.log(req.params.id)
     db.getResourceByID(req.params.id)
       .then(data => {
         const resourceInfo = data;
@@ -52,7 +51,6 @@ module.exports = (db) => {
           // })
           .then(data => {
             const resources = data
-            console.log('CONSOLE.log', data)
             res.render('../views/resources', { resources })
           })
       })
@@ -64,26 +62,43 @@ module.exports = (db) => {
       });
   });
 
-  router.post('/like/:resourceid', (req, res) => {
+  router.put('/like/:resourceid', (req, res) => {
     //want resource that user liekd to be inserted into likes table with user id and resource id
-    const userId = parseInt(req.params.user_id);
-    const resourceId = req.params.id;
-    //if
-    db.insertIntoLikes(userId, resourceId)
+    const userId = parseInt(req.session.user_id);
+    const resourceId = req.params.resourceid;
+    //if already liked, then delete, else add
+    db.checkIfLiked(resourceId)
     .then(data => {
-      res.redirect('/resources/:id');
+      if (data.length !== 0) {
+        db.deleteLiked(resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+      } else {
+        db.insertIntoLikes(userId, resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
+      }
     })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send(err.stack)
-    });
-  });
-
-  router.post("/comment/:id", (req, res) => {
-    db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values (235, 239, 'mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', '1/25/2012'`);
 
   });
 
+  router.put("/comment/:id", (req, res) => {
+    const userId = parseInt(req.session.user_id);
+    const text = req.body.comment
+    const resourceId = req.params.id
+
+    db.postComment(resourceId, userId, text)
+    .then( () => {
+      res.redirect(`/resources/${resourceId}`)
+    }
+    )
+  });
 
   return router;
 };

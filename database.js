@@ -171,14 +171,13 @@ const getAllMyUploadedResources = function(userId) {
 const getResourceByID = (id) => {
   return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
     .then(function(data) {
-      console.log('GET REOURCE BY ID',data.rows)
       return data.rows[0];
     })
 }
 exports.getResourceByID = getResourceByID;
 
 const getCommentsByID = (id) => {
-  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1`, [id])
+  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1 ORDER BY created_at desc`, [id])
 }
 
 exports.getCommentsByID = getCommentsByID;
@@ -197,12 +196,11 @@ const getLikesByID = (id) => {
 
 exports.getLikesByID  = getLikesByID;
 
-const postComment = (resource_id) => {
-  return db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values (235, 239, 'mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer', '1/25/2012'`);
-
+const postComment = (resource_id, user_id, text) => {
+  return db.query(`INSERT INTO comments (resource_id, user_id, text) values ($1, $2, $3);`, [resource_id, user_id, text]);
 }
 
-exports.getLikesByID  = getLikesByID;
+exports.postComment  = postComment;
 
 
 
@@ -235,6 +233,20 @@ const getResourcesByTopicName = function(topicName) {
   });
 }
 
+const checkIfLiked = function(resourceId) {
+  return db.query(`SELECT *
+  FROM likes
+  WHERE likes.resource_id = $1
+  `, [resourceId])
+  .then(data => {
+    return data.rows
+  })
+}
+
+const deleteLiked = function (resourceId) {
+  return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
+}
+
 exports.getResourcesByTopicName = getResourcesByTopicName;
 exports.addTopicsToUser = addTopicsToUser;
 exports.resourceInfo = resourceInfo;
@@ -252,4 +264,6 @@ exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
 exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
 exports.getResourcesByCreatedAt = getResourcesByCreatedAt;
 exports.insertIntoLikes = insertIntoLikes;
-exports.updateUserEmail = updateUserEmail
+exports.updateUserEmail = updateUserEmail;
+exports.checkIfLiked = checkIfLiked;
+exports.deleteLiked = deleteLiked;
