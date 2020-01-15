@@ -85,7 +85,31 @@ module.exports = (db) => {
         });
       }
     })
+  });
 
+  router.put('/rating/:resourceid', (req, res) => {
+    //want resource that user liekd to be inserted into likes table with user id and resource id
+    const userId = parseInt(req.session.user_id);
+    const resourceId = req.params.resourceid;
+    //if already liked, then delete, else add
+    db.checkIfRated(resourceId)
+    .then(data => {
+      if (data.length !== 0) {
+        db.deleteRated(resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+      } else {
+        db.insertIntoRatings(userId, resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
+      }
+    })
   });
 
   router.put("/comment/:id", (req, res) => {
