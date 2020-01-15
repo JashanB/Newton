@@ -14,11 +14,18 @@
         <button >Sign Up</button>
       </form>
     <% } else { %>
-       VIEW PROFILE --- MY RESOURCES --- LOGOUT
+      <div class="user-buttons">
+
+        <form method="GET" action="/<%= resource.userId %>">
+          <button >My Resources</button>
+        </form>
+        <form method="GET" action="/profile/<%= resource.userId %>">
+          <button >My Profile</button>
+        </form>
+        <form method="POST" action="/logout">
+          <button>Logout</button>
+        </form>
       <% } %>
-
-
-
 
     </div>
   </nav>

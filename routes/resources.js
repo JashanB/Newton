@@ -53,11 +53,10 @@ module.exports = (db) => {
           //     })
           // })
           .then(data => {
-            const userId = req.session.user_id
-            const resource = { data: data, userId: userId };
-            console.log('RESOURCE ---->', resource)
 
-            res.render('../views/resources', { data: data, userId: userId })
+            const userId = req.session.user_id
+            const resource = { data, userId };
+            res.render('../views/resources',{  resource })
           })
       })
 

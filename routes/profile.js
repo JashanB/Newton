@@ -9,7 +9,8 @@ module.exports = (db) => {
     if (id) {
       let userId = parseInt(req.params.user_id);
       if (id === userId) {
-        res.render("profile")
+        const resource = { userId };
+        res.render("profile", { resource })
       } else {
         res.redirect(`/${id}`)
       }

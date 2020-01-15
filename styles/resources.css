@@ -42,3 +42,22 @@ body {
    margin: 10px 0 10px 0;
  }
 
+ textarea {
+  background-color: #ffffff ;
+  border: none;
+  height: auto;
+  width: 100%;
+  border-bottom: 5px black solid;
+  resize: none;
+  padding-top: 1.1em;
+  height: 65px;
+  font-weight: bold;
+}
+
+textarea:focus {
+  outline-width: 0;
+}
+
+textarea:focus::placeholder {
+  color: transparent;
+}

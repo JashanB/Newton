@@ -5,55 +5,55 @@ db.connect();
 
 
 //searching database for users
-const getUserWithEmail = function(email) {
+const getUserWithEmail = function (email) {
   return db.query(
-  `SELECT id, email
+    `SELECT id, email
   FROM users
   WHERE email = $1`, [email])
-  .then(function(res) {
-    if (res) {
-      user = res.rows[0];
-    } else {
-      user = null;
-    }
-    return user;
-  })
+    .then(function (res) {
+      if (res) {
+        user = res.rows[0];
+      } else {
+        user = null;
+      }
+      return user;
+    })
 }
 
-const updateUserEmail = function(id, newEmail) {
- return db.query(
-   `UPDATE users
+const updateUserEmail = function (id, newEmail) {
+  return db.query(
+    `UPDATE users
    SET email = $1
    WHERE users.id = $2
    RETURNING *`, [newEmail, id])
-   .then( res => {
-     console.log(res.rows[0]);
-     return res.rows[0];
-   })
+    .then(res => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
 }
 
 
 
-const getUserWithId = function(id) {
+const getUserWithId = function (id) {
   return db.query(
     `SELECT id, email
     FROM users
     WHERE id = $1`, [id])
-    .then(function(res) {
-     if (res) {
-       user = res.rows[0];
-     } else {
-       user = null;
-     }
-     return user;
-   })
- }
+    .then(function (res) {
+      if (res) {
+        user = res.rows[0];
+      } else {
+        user = null;
+      }
+      return user;
+    })
+}
 
 
 
 
 
- //below seems like a useless function?
+//below seems like a useless function?
 const getResources = function () {
   return db.query(`SELECT * FROM resources WHERE resources.id = 1;`)
     .then(data => {
@@ -61,19 +61,19 @@ const getResources = function () {
     });
 }
 
-const getResourcesOrderByCountRating = function() {
+const getResourcesOrderByCountRating = function () {
   return db.query(`SELECT * FROM resources
   JOIN ratings ON ratings.resource_id = resources.id
   WHERE resources.is_deleted = FALSE
   GROUP BY resources.id, ratings.id
   ORDER BY count(ratings.id)
   LIMIT 40;`)
-  .then(data => {
-    return data.rows;
-  });
+    .then(data => {
+      return data.rows;
+    });
 }
 
-const getResourcesByTopicsForUser = function(id) {
+const getResourcesByTopicsForUser = function (id) {
   return db.query(`SELECT resources.*
     FROM user_topics
     JOIN topics_resources ON topics_resources.topic_id = user_topics.topic_id
@@ -81,16 +81,16 @@ const getResourcesByTopicsForUser = function(id) {
     JOIN likes ON resources.id = likes.resource_id
     WHERE user_topics.user_id = $1 AND likes.user_id <> $1;
     `, [id])
-  .then(data => {
-    return data.rows;
-  });
+    .then(data => {
+      return data.rows;
+    });
 }
 
-const getResourcesByCreatedAt = function() {
+const getResourcesByCreatedAt = function () {
   return db.query(`SELECT * FROM resources ORDER BY created_at DESC;`)
-  .then(data => {
-    return data.rows;
-  });
+    .then(data => {
+      return data.rows;
+    });
 }
 
 //populate resource page
@@ -113,64 +113,64 @@ const resourceInfo = (id) => {
 
 
 //grabbing topic choices for sign up and upload page
-const getAllTopics = function() {
+const getAllTopics = function () {
   return db.query(
     `SELECT topics.id, topics.name
     FROM topics`)
-  .then(res => {
-    return res.rows;
-  })
+    .then(res => {
+      return res.rows;
+    })
 }
 
 //adding a user to database
 
-const addUser =  function(email) {
+const addUser = function (email) {
   return db.query(
     ` INSERT INTO users (email)
      VALUES ($1)
      RETURNING *`, [email])
-     .then(function(res) {
+    .then(function (res) {
       return res.rows[0];
-     })
- }
+    })
+}
 
 //connecting topics to user upon signin
-const addTopicsToUser = function(user_id, topic1, topic2, topic3) {
+const addTopicsToUser = function (user_id, topic1, topic2, topic3) {
   return db.query(
     ` INSERT INTO user_topics (user_id, topic_id)
      VALUES ($1, $2), ($1, $3), ($1, $4)
      RETURNING *`, [user_id, topic1, topic2, topic3])
-     .then(function(res) {
+    .then(function (res) {
       console.log(res.rows);
-     })
+    })
 }
 
-const getAllMyLikedResources = function(userId) {
+const getAllMyLikedResources = function (userId) {
   return db.query(
     `SELECT resources.*
     FROM resources
     JOIN likes ON likes.resource_id = resources.id
     WHERE likes.user_id = $1
      `, [userId])
-     .then( res => {
-    return res.rows;
+    .then(res => {
+      return res.rows;
     });
 }
 
-const getAllMyUploadedResources = function(userId) {
+const getAllMyUploadedResources = function (userId) {
   return db.query(
     `SELECT resources.*
     FROM resources
     WHERE resources.created_by = $1`, [userId])
-    .then( res => {
+    .then(res => {
       return res.rows;
-      });
+    });
 }
 
 //  ------  Resource id page functions  ------  //
 const getResourceByID = (id) => {
   return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
-    .then(function(data) {
+    .then(function (data) {
       return data.rows[0];
     })
 }
@@ -187,20 +187,20 @@ const getRatingByID = (id) => {
                   GROUP BY ratings.id`, [id])
 }
 
-exports.getRatingByID  = getRatingByID;
+exports.getRatingByID = getRatingByID;
 
 const getLikesByID = (id) => {
   return db.query(`SELECT likes.* , (SELECT count(likes.id) FROM likes WHERE likes.resource_id = 2)FROM likes WHERE likes.resource_id = $1
                   GROUP BY likes.id`, [id])
 }
 
-exports.getLikesByID  = getLikesByID;
+exports.getLikesByID = getLikesByID;
 
 const postComment = (resource_id, user_id, text) => {
   return db.query(`INSERT INTO comments (resource_id, user_id, text) values ($1, $2, $3);`, [resource_id, user_id, text]);
 }
 
-exports.postComment  = postComment;
+exports.postComment = postComment;
 
 
 
@@ -211,36 +211,36 @@ exports.postComment  = postComment;
 
 // exports.getTopicsByID = getTopicsByID;
 
-const insertIntoLikes = function(userid, resourceid) {
+const insertIntoLikes = function (userid, resourceid) {
   return db.query(`INSERT INTO likes (user_id, resource_id)
   VALUES ($1, $2)
   RETURNING *
   `, [userid, resourceid])
-  .then(function(res) {
-    console.log(res.rows)
-  })
+    .then(function (res) {
+      console.log(res.rows)
+    })
 };
 
-const getResourcesByTopicName = function(topicName) {
+const getResourcesByTopicName = function (topicName) {
   return db.query(`SELECT resources.*
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
     JOIN resources ON topics_resources.resource_id = resources.id
     WHERE topics.name LIKE '%' || $1 || '%';
   `, [topicName])
-  .then(data => {
-    return data.rows;
-  });
+    .then(data => {
+      return data.rows;
+    });
 }
 
-const checkIfLiked = function(resourceId) {
+const checkIfLiked = function (resourceId) {
   return db.query(`SELECT *
   FROM likes
   WHERE likes.resource_id = $1
   `, [resourceId])
-  .then(data => {
-    return data.rows
-  })
+    .then(data => {
+      return data.rows
+    })
 }
 
 const deleteLiked = function (resourceId) {
