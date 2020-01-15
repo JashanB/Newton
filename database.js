@@ -213,7 +213,9 @@ const getResourcesByTopicName = function(topicName) {
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
     JOIN resources ON topics_resources.resource_id = resources.id
-    WHERE topics.name LIKE '%' || $1 || '%';
+    JOIN ratings ON resources.id = ratings.resource_id
+    WHERE topics.name LIKE '%' || $1 || '%'
+    ORDER BY count(ratings.id);
   `, [topicName])
     .then(data => {
       return data.rows;
