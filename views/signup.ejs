@@ -12,7 +12,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/signup.css" type="text/css" />
     <link href="/styles/style.css" rel="stylesheet" type="text/css" >
-    <title>Sign Up</title>
+
   </head>
   <header>
 </header>
@@ -73,7 +73,10 @@
         } else if (!topic1 || !topic2 || !topic3) {
           $('#no-topic-error').slideDown()
         } else {
-          $.post('/profile', $signUp.serialize());
+          $.post('/signup', $signUp.serialize(), data => {
+            console.log('data', data);
+            window.location.href ="http://localhost:8080/" + data.user_id;
+          });
         }
       })
     });

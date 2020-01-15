@@ -11,8 +11,14 @@ module.exports = (db) => {
       if (id === userId) {
         return db.getTopicsByUserId(id)
         .then(topics => {
+<<<<<<< HEAD
           let resource = { topics, userId };
           res.render("profile", resource);
+=======
+          //const templateVars = {topics}
+          const resource = { topics, userId };
+          res.render("profile", {resource});
+>>>>>>> master
         })
       } else {
         res.redirect(`/${id}`)
@@ -29,23 +35,34 @@ module.exports = (db) => {
   router.post("/email", (req, res) => {
     let id = req.session.user_id;
     let newEmail = req.body.email;
-    return db.getUserWithEmail(newEmail)
-    .then(user => {
+    console.log(req.body);
+    console.log(newEmail);
+    if (newEmail.length === 0) {
+      res.json({error: 'Please input a valid email'});
+    } else {
+      return db.getUserWithEmail(newEmail)
+      .then(user => {
       if (user) {
-        res.status(404).send('Status Code 404: Sorry that email is already in use');
+        res.json({error: 'Sorry, that email appears to already be in use'});
       } else {
         return db.updateUserEmail(id, newEmail)
         .then( data => {
           if (data) {
-            res.status(200)
+            res.json({error: null, email: newEmail});
           }
         })
       }
-    })
+     })
+    }
   });
 
-  // router.post("/:topicid", (req, res) => {
-
-  // });
+  router.post("/:topicid", (req, res) => {
+    let topicId = req.params.topicid;
+    let userId = req.session.user_id;
+    return db.deleteTopicFromUser(userId, topicId)
+    .then(data => {
+      res.redirect(`/profile/${userId}`)
+    })
+  });
   return router;
 };

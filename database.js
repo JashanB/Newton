@@ -153,20 +153,24 @@ const getResourceByID = (id) => {
 exports.getResourceByID = getResourceByID;
 
 const getCommentsByID = (id) => {
-  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1 ORDER BY created_at desc`, [id])
+  return db.query(`SELECT comments.* , users.email FROM comments
+  JOIN users ON users.id = comments.user_id
+  WHERE comments.resource_id = $1
+  ORDER BY created_at desc
+  `, [id])
 }
 
 exports.getCommentsByID = getCommentsByID;
 
 const getRatingByID = (id) => {
-  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = 2)FROM ratings WHERE ratings.resource_id = $1
+  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = 2) FROM ratings WHERE ratings.resource_id = $1
                   GROUP BY ratings.id`, [id])
 }
 
 exports.getRatingByID = getRatingByID;
 
 const getLikesByID = (id) => {
-  return db.query(`SELECT likes.* , (SELECT count(likes.id) FROM likes WHERE likes.resource_id = 2)FROM likes WHERE likes.resource_id = $1
+  return db.query(`SELECT likes.* FROM likes WHERE likes.resource_id = $1
                   GROUP BY likes.id`, [id])
 }
 
@@ -177,8 +181,6 @@ const postComment = (resource_id, user_id, text) => {
 }
 
 exports.postComment = postComment;
-
-
 
 // const getTopicsByID = (id) => {
 //   return db.query(`SELECT likes.* FROM likes WHERE likes.resource_id = $1
@@ -261,6 +263,20 @@ const getTopicsByUserId = function(id) {
   })
 }
 
+const deleteTopicFromUser = function(userId, topicId) {
+  return db.query(
+    `DELETE
+    FROM user_topics
+    WHERE user_id = $1 AND topic_id = $2
+    RETURNING *`, [userId, topicId])
+    .then(res => {
+      return res.rows;
+    })
+
+}
+
+
+
 const deleteRated = function (resourceId) {
   return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1`, [resourceId])
 }
@@ -310,3 +326,4 @@ exports.deleteRated = deleteRated;
 exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
 exports.getAllMyLikedResourcesBySearch = getAllMyLikedResourcesBySearch;
+exports.deleteTopicFromUser = deleteTopicFromUser;

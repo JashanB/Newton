@@ -3,9 +3,15 @@ const updateUserEmail = function() {
   $updateEmail.submit(function() {
     //line here to check that email is not empty before you send the POST
     event.preventDefault();
-    console.log($updateEmail);
-    $.post('/profile', $updateEmail.serialize());
-    $("#updated-email-message").slideDown();
+    console.log($updateEmail.serialize());
+    $.post('/profile/email', $updateEmail.serialize(), data => {
+      if (data.error) {
+        alert(data.error)
+      }
+      else {
+        alert(`Thanks! Your email has been updated to ${data.email}`)
+      }
+    })
   })
 }
 

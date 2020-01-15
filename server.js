@@ -53,6 +53,7 @@ const logoutRoutes = require("./routes/logout");
 const profileRoutes = require("./routes/profile");
 const myResourcesRoutes = require("./routes/myResources");
 
+
 // CSS Links
 app.use("/styles",express.static(__dirname + "/styles"));
 

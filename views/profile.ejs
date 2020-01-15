@@ -16,9 +16,11 @@
 
   <body>
     <%- include('./partials/_header') %>
+    <%- include('./partials/_uploadResource') %>
+
 
     <h1>Profile</h1>
-    <form id="update-email" action="/profile/" method="POST">
+    <form id="update-email" action="/profile/email" method="POST">
       <label>Enter new email to update:</label>
 
       <input type="email" name="email" placeholder="example@email.com">
@@ -27,9 +29,10 @@
   <article id="updated-email-message">
     <p>Thank you! Your email has been updated!</p>
   </article>
-  <%for (let topic of topics) { %>
+  <h3>Click delete to removie a topic from your topics of interest:</h3>
+  <%for (let topic of resource.topics) { %>
     <p><%= topic.name %></p>
-    <form method="POST" action="/profile/<%topic.id%>">
+    <form method="POST" action="/profile/<%=topic.id%>">
       <button type="submit">Delete</button>
     </form>
 <% } %>
