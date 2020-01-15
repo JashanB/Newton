@@ -9,7 +9,7 @@ nav {
 
 .title {
   display: flex;
-  font-size: 1em;
+  font-size: 1.5em;
   color: #fff;
   border: none;
   background-color: transparent;
@@ -20,6 +20,7 @@ nav {
 }
 
 .user-buttons button {
+  margin-top: 8px;
   font-size: 1em;
   color: #fff;
   border: none;
