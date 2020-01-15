@@ -9,17 +9,31 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/profile.js"></script>
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
   </head>
-
 
   <body>
     <h1>Profile</h1>
-    <form id="update-email" action="/profile?_method=PUT" method="POST">
+    <form id="update-email" action="/profile/" method="POST">
       <label>Enter new email to update:</label>
 
       <input type="email" name="email" placeholder="example@email.com">
       <button type="submit">Update</button>
   </form>
-    <p>edit your topics, will be an app.delete</p>
+  <article id="updated-email-message">
+    <p>Thank you! Your email has been updated!</p>
+  </article>
+  <%for (let topic of topics) { %>
+    <p><%= topic.name %></p>
+    <form method="POST" action="/profile/<%topic.id%>">
+      <button type="submit">Delete</button>
+    </form>
+<% } %>
   </body>
 </html>
+
+
+
+
+

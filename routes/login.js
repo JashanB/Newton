@@ -16,7 +16,7 @@ module.exports = (db) => {
     let email = req.body.email;
     if (email.length === 0) {
       //later change to error on template ejs
-      res.status(404).send('Status Code 404: Error: No email inputed.');
+      res.status(404).send('Error: No email inputed.');
     } else {
       return db.getUserWithEmail(email)
       .then( user => {
@@ -32,9 +32,6 @@ module.exports = (db) => {
     }
   })
 
-  // router.post("/logout", (req, res) => {
-
-  // })
 
   return router;
 };

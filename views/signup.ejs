@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Sign Up</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign Up</title>
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/signup.css" type="text/css" />
   </head>
   <header>
 </header>
   <body>
-    <form method="POST" action="/signup">
-      <label for="lgFormGroupInput" >Enter email to sign up:</label>
-      <input type="email" name="email" placeholder="example@email.com" style="width: 300px; margin: 1em">
+    <form id="sign-up" method="POST" action="/signup">
+      <label >Enter email to sign up:</label>
+      <input type="email" name="email" placeholder="example@email.com">
       <button type="submit">Sign up</button>
-
+      <article id="email-error">
+        <p>Please submit a valid email.</p>
+      </article>
       <ul>
         <li>
           <label for="topic-select-1">Choose your first topic:</label>
@@ -44,11 +52,29 @@
         </li>
       </ul>
     </form>
-    <!-- <script>
+    <article id="no-topic-error">
+      <p>Please choose 3 topics you are interested in!</p>
+    </article>
+    <script>
     $(document).ready(function() {
-      const $topic1 = $('#topic-select-1');
+
+      const $signUp = $("#sign-up")
+      $signUp.submit(function() {
+        event.preventDefault();
+        const topic1 = $( "select#topic-select-1" ).val();
+        const topic2 = $( "select#topic-select-2" ).val();
+        const topic3 = $( "select#topic-select-3" ).val();
+        const emailLength = $("input[name='email']").val().length;
+        if (emailLength === 0) {
+          $('#email-error').slideDown()
+        } else if (!topic1 || !topic2 || !topic3) {
+          $('#no-topic-error').slideDown()
+        } else {
+          $.post('/profile', $signUp.serialize());
+        }
+      })
     });
-    </script> -->
+    </script>
   </body>
 </html>
 

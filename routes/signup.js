@@ -29,7 +29,7 @@ module.exports = (db) => {
     const topic3 = req.body.topics3;
     if (email.length === 0) {
       //later change to error on template ejs
-      res.status(404).send('Status Code 404: No email inputed.');
+      res.status(404).send('Error: No email inputed.');
     } else {
       //checks if email is already in use
       return db.getUserWithEmail(email)

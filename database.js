@@ -247,6 +247,25 @@ const deleteLiked = function (resourceId) {
   return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
 }
 
+
+
+const getTopicsByUserId = function(id) {
+  return db.query(
+    `SELECT topics.id, topics.name
+    FROM topics
+    JOIN user_topics ON topics.id = user_topics.topic_id
+    JOIN users ON users.id = user_topics.user_id
+    WHERE users.id = $1`, [id])
+  .then(res => {
+    return res.rows;
+  })
+}
+
+
+
+
+
+
 exports.getResourcesByTopicName = getResourcesByTopicName;
 exports.addTopicsToUser = addTopicsToUser;
 exports.resourceInfo = resourceInfo;
@@ -267,3 +286,4 @@ exports.insertIntoLikes = insertIntoLikes;
 exports.updateUserEmail = updateUserEmail;
 exports.checkIfLiked = checkIfLiked;
 exports.deleteLiked = deleteLiked;
+exports.getTopicsByUserId = getTopicsByUserId

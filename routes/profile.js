@@ -9,7 +9,11 @@ module.exports = (db) => {
     if (id) {
       let userId = parseInt(req.params.user_id);
       if (id === userId) {
-        res.render("profile")
+        return db.getTopicsByUserId(id)
+        .then(topics => {
+          let templateVars = { topics };
+          res.render("profile", templateVars);
+        })
       } else {
         res.redirect(`/${id}`)
       }
@@ -21,8 +25,8 @@ module.exports = (db) => {
   });
 
   //need to add the update stuff
-  //use method override
-  router.put("/", (req, res) => {
+
+  router.post("/email", (req, res) => {
     let id = req.session.user_id;
     let newEmail = req.body.email;
     return db.getUserWithEmail(newEmail)
@@ -38,9 +42,10 @@ module.exports = (db) => {
         })
       }
     })
-
-
   });
 
+  // router.post("/:topicid", (req, res) => {
+
+  // });
   return router;
 };
