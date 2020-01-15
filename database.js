@@ -260,7 +260,17 @@ const getTopicsByUserId = function(id) {
   })
 }
 
+const deleteTopicFromUser = function(userId, topicId) {
+  return db.query(
+    `DELETE
+    FROM user_topics
+    WHERE user_id = $1 AND topic_id = $2
+    RETURNING *`, [userId, topicId])
+    .then(res => {
+      return res.rows;
+    })
 
+}
 
 
 
@@ -295,3 +305,4 @@ exports.checkIfRated = checkIfRated;
 exports.deleteRated = deleteRated;
 exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
+exports.deleteTopicFromUser = deleteTopicFromUser;

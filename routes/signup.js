@@ -42,9 +42,11 @@ module.exports = (db) => {
             const user = data;
             return user;
           }).then( user => {
+            console.log('in post')
             const userId = user.id;
-            db.addTopicsToUser(userId, topic1, topic2, topic3);
-            res.redirect(`/${userId}`);
+            db.addTopicsToUser(userId, topic1, topic2, topic3).then( () => {
+              res.json({user_id: userId});
+            });
           }).catch(err => {
             console.log(err);
           })
