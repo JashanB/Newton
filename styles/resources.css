@@ -4,15 +4,16 @@ body {
 }
 
 .resource {
-   margin: 0% 20% 0% 20%;
-   padding: 0 5% 0 5%;
+   margin: 0% 20%;
+   padding: 0 10%;
    background-color: white;
    height: 100%
  }
 
  .img {
    text-align: center;
-   padding: 1em 0 0 0;
+   margin: 1em 0 0 0;
+   border: black solid 1px;
  }
 
 .likes-ratings {

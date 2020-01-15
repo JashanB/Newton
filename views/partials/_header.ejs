@@ -1,24 +1,25 @@
-<link href="/styles/nav.css" rel="stylesheet" type="text/css" >
+<link href="/styles/nav.css" rel="stylesheet" type="text/css" />
 
 <header>
   <nav>
-    <h1>Newton</h1>
-
-
-
-
+    <form method="GET" action="/:userid">
+     <button class='title'>Newton</button>
+    </form>
+    <% if (!resource.userId) { %>
     <div class="user-buttons">
-      <form>
+      <form method="GET" action="/login">
         <button>Login</button>
       </form>
-
-      <form>
-        <button>Sign Up</button>
+      <form method="GET" action="/signup">
+        <button >Sign Up</button>
       </form>
+    <% } else { %>
+       VIEW PROFILE --- MY RESOURCES --- LOGOUT
+      <% } %>
+
 
 
 
     </div>
   </nav>
 </header>
-

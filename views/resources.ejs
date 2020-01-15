@@ -22,14 +22,14 @@
     <section class="resource">
 
       <div class="img">
-        <img class="resource-img" src=<%= resources.resourceInfo.img_url %> />
+        <img class="resource-img" src=<%= resource.resourceInfo.img_url %>  />
       </div>
 
       <section class="likes-ratings">
 
         <form method="POST" action="/rating">
           <button type='submit'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></button>
-           <%= resources.ratings.count %>
+           <%= resource.ratings.count %>
         </form>
 
         <form method="POST" action="/resources/like/<%=resources.resourceInfo.id%>?_method=PUT">
@@ -38,16 +38,16 @@
         </form>
       </section>
 
-      <a id="url" href=<%= resources.resourceInfo.url %>><%= resources.resourceInfo.url %></a>
+      <a id="url" href=<%= resources.resourceInfo.url %>><%= resource.resourceInfo.url %></a>
 
-      <p id="resource-desciption"> <%= resources.resourceInfo.description %></p>
+      <p id="resource-desciption"> <%= resource.resourceInfo.description %></p>
 
 
 
 
 
     <section class="resource-comemnts">
-      <form action="comment/<%= resources.resourceInfo.id %>?_method=PUT" method="POST">
+      <form action="comment/<%= resource.resourceInfo.id %>?_method=PUT" method="POST">
       Comment <input name="comment" type="text" ><br>
       <input type="submit" value="submit">
 
