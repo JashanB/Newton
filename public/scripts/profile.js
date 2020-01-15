@@ -3,13 +3,12 @@ const updateUserEmail = function() {
   const $updateEmail = $('#update-email');
   $updateEmail.submit(function() {
     event.preventDefault();
-    alert("Submitted");
+    console.log($updateEmail);
+    $.post('/signup', $updateEmail.serialize());
   });
 }
 
 
 $(document).ready(function() {
-  console.log('running')
   updateUserEmail();
-
 });
