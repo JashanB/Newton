@@ -9,6 +9,9 @@
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/signup.js"></script>
+
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/signup.css" type="text/css" />
     <link href="/styles/style.css" rel="stylesheet" type="text/css" >
@@ -22,9 +25,6 @@
       <label >Enter email to sign up:</label>
       <input type="email" name="email" placeholder="example@email.com">
       <button type="submit">Sign up</button>
-      <article id="email-error">
-        <p>Please submit a valid email.</p>
-      </article>
       <ul>
         <li>
           <label for="topic-select-1">Choose your first topic:</label>
@@ -55,32 +55,6 @@
         </li>
       </ul>
     </form>
-    <article id="no-topic-error">
-      <p>Please choose 3 topics you are interested in!</p>
-    </article>
-    <script>
-    $(document).ready(function() {
-
-      const $signUp = $("#sign-up")
-      $signUp.submit(function() {
-        event.preventDefault();
-        const topic1 = $( "select#topic-select-1" ).val();
-        const topic2 = $( "select#topic-select-2" ).val();
-        const topic3 = $( "select#topic-select-3" ).val();
-        const emailLength = $("input[name='email']").val().length;
-        if (emailLength === 0) {
-          $('#email-error').slideDown()
-        } else if (!topic1 || !topic2 || !topic3) {
-          $('#no-topic-error').slideDown()
-        } else {
-          $.post('/signup', $signUp.serialize(), data => {
-            console.log('data', data);
-            window.location.href ="http://localhost:8080/" + data.user_id;
-          });
-        }
-      })
-    });
-    </script>
   </body>
 </html>
 
