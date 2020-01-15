@@ -56,6 +56,7 @@ module.exports = (db) => {
 
             const userId = req.session.user_id
             const resource = { data, userId };
+            console.log('RESOURCE', resource.data.comments)
             res.render('../views/resources',{  resource })
           })
       })
