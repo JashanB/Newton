@@ -26,11 +26,17 @@ module.exports = (db) => {
     const imageURL = req.body.imageURL;
     const resourceURL = req.body.resourceURL;
     const topic = req.body.topic;
+    let userId = req.session.user_id;
 
-
-
+    return db.addNewResource(title, description, imageURL, resourceURL, userId)
+    .then(data => {
+      const resourceId = data.id
+      db.linkTopicToResource(topic, resourceId);
+    })
+    .then(data => {
+      res.json({user_id: userId})
+    });
 
   })
-
   return router;
 };

@@ -302,11 +302,28 @@ const getAllMyLikedResourcesBySearch = function (search, userId) {
     });
 }
 
-const addNewResource = function(title, description, imageURL, resourceURL, topic, userId) {
-
+const addNewResource = function(title, description, imageURL, resourceURL, userId) {
+  return db.query(
+    `INSERT INTO resources
+    (title, url, description, img_url, created_by)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`, [title, resourceURL, description, imageURL, userId])
+    .then(res => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
 }
 
-
+const linkTopicToResource = function(topicId, resourceId) {
+  return db.query (
+    `INSERT INTO topics_resources
+    (topic_id, resource_id)
+    VALUES ($1, $2, $3)
+    RETURNING *`, [topicId, resourceId])
+    .then(res => {
+      return res.rows;
+    })
+}
 
 
 
@@ -336,4 +353,5 @@ exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
 exports.getAllMyLikedResourcesBySearch = getAllMyLikedResourcesBySearch;
 exports.deleteTopicFromUser = deleteTopicFromUser;
-exports.addNewResource = addNewResource
+exports.addNewResource = addNewResource;
+exports.linkTopicToResource = linkTopicToResource;
