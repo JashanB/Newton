@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>My Profile</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Profile</title>
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/profile.js"></script>
   </head>
+
+
   <body>
     <h1>Profile</h1>
-    <form id="updateEmail" action="/profile?_method=PUT" method="POST">
+    <form id="update-email" action="/profile?_method=PUT" method="POST">
       <label>Enter new email to update:</label>
 
       <input type="email" name="email" placeholder="example@email.com">
       <button type="submit">Update</button>
   </form>
     <p>edit your topics, will be an app.delete</p>
-    <script>document.getElementById('updateEmail').addEventListener('submit', function(event) {
-      event.preventDefault()
-      console.log('it worked', this, event)
-    })
-    </script>
   </body>
 </html>

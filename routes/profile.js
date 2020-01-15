@@ -34,6 +34,7 @@ module.exports = (db) => {
         .then( data => {
           if (data) {
             res.status(200)
+            res.redirect("/");
           }
         })
       }

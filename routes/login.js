@@ -25,14 +25,16 @@ module.exports = (db) => {
           res.redirect("/signup");
         } else {
           req.session.user_id = user.id;
-          //const templateVars = { user };
-          //want to send to home/userid
           res.redirect(`/${user.id}`);
         }
       })
 
     }
   })
+
+  // router.post("/logout", (req, res) => {
+
+  // })
 
   return router;
 };
