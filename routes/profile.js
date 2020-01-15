@@ -11,7 +11,7 @@ module.exports = (db) => {
       if (id === userId) {
         return db.getTopicsByUserId(id)
         .then(topics => {
-          let resource = { topics, userID };
+          let resource = { topics, userId };
           res.render("profile", resource);
         })
       } else {

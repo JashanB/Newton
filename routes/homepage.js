@@ -19,10 +19,9 @@ module.exports = (db) => {
   });
 
   router.post("/search", (req, res) => {
-    const topicName = req.body.search;
+    const search = req.body.search.slice(1);
     let userId = parseInt(req.session.user_id);
-    console.log(req.body)
-    db.getResourcesByTopicName(topicName)
+    db.getResourcesBySearch(search)
       .then(data => {
         const resource = {data:data, userId:userId};
         res.render('index', { resource });

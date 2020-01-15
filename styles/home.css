@@ -1,5 +1,13 @@
 #resource-container {
-  display: flex
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: space-between;
+  margin: 0% 20%;
+  padding: 0 10%;
+  flex-grow: 1
 }
 
 
@@ -14,6 +22,7 @@
   width: 2em;
   height: 4em;
   padding: 4em;
+  margin: 0.5em;
   text-align: center
  }
 

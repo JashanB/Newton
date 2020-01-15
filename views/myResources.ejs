@@ -7,6 +7,14 @@
     <title>Profile</title>
   </head>
   <body>
+    <div class="wrap">
+        <div class="search">
+          <form class="search-bar" method="POST" action="/myResources/search/<%=resource.userId%>">
+            <input type="text" placeholder="Search" name="search">
+            <button type="submit"><i class="fa fa-search"></i>Search</button>
+          </form>
+        </div>
+    </div>
     <h1>My Resources</h1>
     <p>Liked resources</p>
     <section id="likedResource-container">

@@ -39,6 +39,33 @@ module.exports = (db) => {
     }
   });
 
+  router.post("/search/:user_id", (req, res) => {
+    const search = req.body.search.slice(1);
+    let userId = parseInt(req.session.user_id);
+    if (userId) {
+      db.getAllMyLikedResourcesBySearch(search, userId)
+      .then(data => {
+        const liked = data;
+        db.getAllMyUploadedResources(userId)
+        .then(data => {
+          const uploaded = data;
+          const resource = { liked: liked, uploaded: uploaded, userId: userId };
+        res.render('myResources', { resource });
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send(err.stack)
+      });
+    } else {
+      res.redirect('/');
+    }
+  });
+
   router.delete('/delete/:resourceid', (req, res) => {
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;

@@ -5,9 +5,6 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
-
-
-
     db.getResourceByID(req.params.id)
       .then(data => {
         const resourceInfo = data;
@@ -18,7 +15,6 @@ module.exports = (db) => {
               comments: comments.rows
             }
           })
-
       })
       .then(data => {
         return db.getRatingByID(req.params.id)
@@ -40,26 +36,12 @@ module.exports = (db) => {
                 }
               })
           })
-          // .then(data => {
-          //   return db.getTopicsByID(req.params.id)
-          //     .then(topics => {
-          //       return {
-          //         resourceInfo: data.resourceInfo,
-          //         comments: data.comments,
-          //         ratings: data.ratings,
-          //         likes: data.likes,
-          //         topics: topics.rows
-          //       }
-          //     })
-          // })
           .then(data => {
-
             const userId = req.session.user_id
             const resource = { data, userId };
             res.render('../views/resources',{  resource })
           })
       })
-
       .catch(err => {
         res
           .status(500)

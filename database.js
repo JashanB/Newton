@@ -208,15 +208,16 @@ const insertIntoRatings = function(userid, resourceid) {
   })
 };
 
-const getResourcesByTopicName = function(topicName) {
+const getResourcesBySearch = function(search) {
   return db.query(`SELECT resources.*
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
     JOIN resources ON topics_resources.resource_id = resources.id
     JOIN ratings ON resources.id = ratings.resource_id
-    WHERE topics.name LIKE '%' || $1 || '%'
+    WHERE topics.name LIKE '%' || $1 || '%' OR resources.title LIKE '%' || $1 || '%'
+    GROUP BY resources.id, ratings.id
     ORDER BY count(ratings.id);
-  `, [topicName])
+  `, [search])
     .then(data => {
       return data.rows;
     });
@@ -260,10 +261,6 @@ const getTopicsByUserId = function(id) {
   })
 }
 
-
-
-
-
 const deleteRated = function (resourceId) {
   return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1`, [resourceId])
 }
@@ -272,7 +269,24 @@ const deleteUploadedResource = function(resourceId, createdBy) {
   return db.query(`DELETE FROM resources WHERE id = $1 AND created_by = $2`, [resourceId, createdBy])
 }
 
-exports.getResourcesByTopicName = getResourcesByTopicName;
+const getAllMyLikedResourcesBySearch = function (search, userId) {
+  return db.query(`SELECT resources.*
+    FROM topics
+    JOIN topics_resources ON topics_resources.topic_id = topics.id
+    JOIN resources ON topics_resources.resource_id = resources.id
+    JOIN ratings ON resources.id = ratings.resource_id
+    JOIN likes ON likes.resource_id = resources.id
+    WHERE topics.name LIKE '%' || $1 || '%' OR resources.title LIKE '%' || $1 || '%'
+    GROUP BY resources.id, ratings.id, likes.user_id
+    HAVING likes.user_id = $2
+    ORDER BY count(ratings.id);
+  `, [search, userId])
+    .then(data => {
+      return data.rows;
+    });
+}
+
+exports.getResourcesBySearch = getResourcesBySearch;
 exports.addTopicsToUser = addTopicsToUser;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
 exports.getResourcesByTopicsForUser = getResourcesByTopicsForUser;
@@ -295,3 +309,4 @@ exports.checkIfRated = checkIfRated;
 exports.deleteRated = deleteRated;
 exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
+exports.getAllMyLikedResourcesBySearch = getAllMyLikedResourcesBySearch;
