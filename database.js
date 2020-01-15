@@ -302,6 +302,15 @@ const getAllMyLikedResourcesBySearch = function (search, userId) {
     });
 }
 
+const addNewResource = function(title, description, imageURL, resourceURL, topic, userId) {
+
+}
+
+
+
+
+
+
 exports.getResourcesBySearch = getResourcesBySearch;
 exports.addTopicsToUser = addTopicsToUser;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
@@ -327,3 +336,4 @@ exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
 exports.getAllMyLikedResourcesBySearch = getAllMyLikedResourcesBySearch;
 exports.deleteTopicFromUser = deleteTopicFromUser;
+exports.addNewResource = addNewResource

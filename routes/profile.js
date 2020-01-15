@@ -11,7 +11,6 @@ module.exports = (db) => {
       if (id === userId) {
         return db.getTopicsByUserId(id)
         .then(topics => {
-          //const templateVars = {topics}
           const resource = { topics, userId };
           res.render("profile", {resource});
         })

@@ -52,6 +52,7 @@ const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
 const profileRoutes = require("./routes/profile");
 const myResourcesRoutes = require("./routes/myResources");
+const uploadResourceRoutes = require("./routes/upload");
 
 
 // CSS Links
@@ -65,6 +66,7 @@ app.use("/login", loginRoutes(database));
 app.use("/logout", logoutRoutes(database));
 app.use("/profile", profileRoutes(database));
 app.use("/myresources", myResourcesRoutes(database));
+app.use("/upload", uploadResourceRoutes(database));
 app.use("/", homepageRoutes(database));
 
 app.listen(PORT, () => {
