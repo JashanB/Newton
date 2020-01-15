@@ -72,6 +72,8 @@ module.exports = (db) => {
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
     //if already liked, then delete, else add
+    //if logged in, can like, otherwise render /:resourceid
+    if (userId) {
     db.checkIfLiked(resourceId)
     .then(data => {
       if (data.length !== 0) {
@@ -90,19 +92,54 @@ module.exports = (db) => {
         });
       }
     })
+  } else {
+    res.redirect(`/resources/${resourceId}`)
+  }
+  });
 
+
+  router.put('/rating/:resourceid', (req, res) => {
+    //want resource that user liekd to be inserted into likes table with user id and resource id
+    const userId = parseInt(req.session.user_id);
+    const resourceId = req.params.resourceid;
+    //if already liked, then delete, else add
+    if (userId) {
+    db.checkIfRated(resourceId)
+    .then(data => {
+      if (data.length !== 0) {
+        db.deleteRated(resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+      } else {
+        db.insertIntoRatings(userId, resourceId)
+        .then(data => {
+          res.redirect(`/resources/${resourceId}`);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
+      }
+    })
+  } else {
+    res.redirect(`/resources/${resourceId}`);
+  }
   });
 
   router.put("/comment/:id", (req, res) => {
     const userId = parseInt(req.session.user_id);
     const text = req.body.comment
     const resourceId = req.params.id
-
+    if (userId) {
     db.postComment(resourceId, userId, text)
     .then( () => {
       res.redirect(`/resources/${resourceId}`)
     }
     )
+  } else {
+    res.redirect(`/login`)
+  }
   });
 
   return router;

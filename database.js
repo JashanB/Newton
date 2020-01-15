@@ -67,10 +67,10 @@ const getResourcesOrderByCountRating = function () {
   WHERE resources.is_deleted = FALSE
   GROUP BY resources.id, ratings.id
   ORDER BY count(ratings.id)
-  LIMIT 40;`)
-    .then(data => {
-      return data.rows;
-    });
+  LIMIT 50;`)
+  .then(data => {
+    return data.rows;
+  });
 }
 
 const getResourcesByTopicsForUser = function (id) {
@@ -221,7 +221,18 @@ const insertIntoLikes = function (userid, resourceid) {
     })
 };
 
-const getResourcesByTopicName = function (topicName) {
+
+const insertIntoRatings = function(userid, resourceid) {
+  return db.query(`INSERT INTO ratings (user_id, resource_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [userid, resourceid])
+  .then(function(res) {
+    console.log(res.rows)
+  })
+};
+
+const getResourcesByTopicName = function(topicName) {
   return db.query(`SELECT resources.*
     FROM topics
     JOIN topics_resources ON topics_resources.topic_id = topics.id
@@ -243,8 +254,26 @@ const checkIfLiked = function (resourceId) {
     })
 }
 
+const checkIfRated = function(resourceId) {
+  return db.query(`SELECT *
+  FROM ratings
+  WHERE ratings.resource_id = $1
+  `, [resourceId])
+  .then(data => {
+    return data.rows
+  })
+}
+
 const deleteLiked = function (resourceId) {
   return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
+}
+
+const deleteRated = function (resourceId) {
+  return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1`, [resourceId])
+}
+
+const deleteUploadedResource = function(resourceId, createdBy) {
+  return db.query(`DELETE FROM resources WHERE id = $1 AND created_by = $2`, [resourceId, createdBy])
 }
 
 exports.getResourcesByTopicName = getResourcesByTopicName;
@@ -267,3 +296,7 @@ exports.insertIntoLikes = insertIntoLikes;
 exports.updateUserEmail = updateUserEmail;
 exports.checkIfLiked = checkIfLiked;
 exports.deleteLiked = deleteLiked;
+exports.checkIfRated = checkIfRated;
+exports.deleteRated = deleteRated;
+exports.insertIntoRatings = insertIntoRatings;
+exports.deleteUploadedResource = deleteUploadedResource;
