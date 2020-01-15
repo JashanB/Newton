@@ -7,12 +7,20 @@ nav {
   font-size: 1em
 }
 
-h1 {
+.title {
   display: flex;
+  font-size: 1.5em;
+  color: #fff;
+  border: none;
+  background-color: transparent;
+  margin-left: 1em;
+  cursor: pointer;
+
 
 }
 
 .user-buttons button {
+  margin-top: 8px;
   font-size: 1em;
   color: #fff;
   border: none;
@@ -23,5 +31,4 @@ h1 {
 
 .user-buttons{
   display: flex;
-
 }

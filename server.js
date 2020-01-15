@@ -49,6 +49,7 @@ const resourceRoutes = require("./routes/resources");
 const signUpRoutes = require("./routes/signup");
 const homepageRoutes = require("./routes/homepage")
 const loginRoutes = require("./routes/login");
+const logoutRoutes = require("./routes/logout");
 const profileRoutes = require("./routes/profile");
 const myResourcesRoutes = require("./routes/myResources");
 
@@ -60,6 +61,7 @@ app.use("/styles",express.static(__dirname + "/styles"));
 app.use("/resources", resourceRoutes(database));
 app.use("/signup", signUpRoutes(database));
 app.use("/login", loginRoutes(database));
+app.use("/logout", logoutRoutes(database));
 app.use("/profile", profileRoutes(database));
 app.use("/myresources", myResourcesRoutes(database));
 app.use("/", homepageRoutes(database));

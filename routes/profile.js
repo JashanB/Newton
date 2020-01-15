@@ -11,8 +11,8 @@ module.exports = (db) => {
       if (id === userId) {
         return db.getTopicsByUserId(id)
         .then(topics => {
-          let templateVars = { topics };
-          res.render("profile", templateVars);
+          let resource = { topics, userID };
+          res.render("profile", resource);
         })
       } else {
         res.redirect(`/${id}`)

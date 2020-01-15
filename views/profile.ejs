@@ -9,11 +9,14 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/profile.js"></script>
-    <!-- App CSS -->
-    <link rel="stylesheet" href="/styles/profile.css" type="text/css" />
+
+    <link href="/styles/profile.css" rel="stylesheet" type="text/css" >
+    <link href="/styles/style.css" rel="stylesheet" type="text/css" >
   </head>
 
   <body>
+    <%- include('./partials/_header') %>
+
     <h1>Profile</h1>
     <form id="update-email" action="/profile/" method="POST">
       <label>Enter new email to update:</label>

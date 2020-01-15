@@ -20,10 +20,11 @@ module.exports = (db) => {
 
   router.post("/search", (req, res) => {
     const topicName = req.body.search;
+    let userId = parseInt(req.session.user_id);
     console.log(req.body)
     db.getResourcesByTopicName(topicName)
       .then(data => {
-        const resource = {data:data};
+        const resource = {data:data, userId:userId};
         res.render('index', { resource });
       })
       .catch(err => {
