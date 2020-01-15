@@ -78,7 +78,7 @@ module.exports = (db) => {
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
     //if already liked, then delete, else add
-    db.checkIfLiked(resourceId)
+    db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
         db.deleteLiked(resourceId)
@@ -87,8 +87,19 @@ module.exports = (db) => {
         })
       } else {
         db.insertIntoLikes(userId, resourceId)
-        .then(data => {
-          res.redirect(`/${userId}`);
+        .then(() => {
+          db.getTopicsForResource(resourceId)
+          .then(data => {
+            const topics = data;
+            for (let i = 0; i < topics.length; i++) {
+              db.insertUserTopics(userId, topics[i].topic_id)
+            }
+            res.redirect(`/${userId}`);
+          })
+          .catch(err => {
+            console.error(err);
+            res.status(500).send(err.stack)
+          });
         })
         .catch(err => {
           console.error(err);

@@ -225,21 +225,21 @@ const getResourcesBySearch = function(search) {
     });
 }
 
-const checkIfLiked = function (resourceId) {
+const checkIfLiked = function (resourceId, userId) {
   return db.query(`SELECT *
   FROM likes
-  WHERE likes.resource_id = $1
-  `, [resourceId])
+  WHERE likes.resource_id = $1 AND likes.user_id = $2
+  `, [resourceId, userId])
     .then(data => {
       return data.rows
     })
 }
 
-const checkIfRated = function(resourceId) {
+const checkIfRated = function(resourceId, userId) {
   return db.query(`SELECT *
   FROM ratings
-  WHERE ratings.resource_id = $1
-  `, [resourceId])
+  WHERE ratings.resource_id = $1 AND ratings.user_id = $2
+  `, [resourceId, userId])
   .then(data => {
     return data.rows
   })
@@ -302,6 +302,44 @@ const getAllMyLikedResourcesBySearch = function (search, userId) {
     });
 }
 
+const addNewResource = function(title, description, imageURL, resourceURL, userId) {
+  return db.query(
+    `INSERT INTO resources
+    (title, url, description, img_url, created_by)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *`, [title, resourceURL, description, imageURL, userId])
+    .then(res => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
+}
+
+const linkTopicToResource = function(topicId, resourceId) {
+  return db.query (
+    `INSERT INTO topics_resources
+    (topic_id, resource_id)
+    VALUES ($1, $2, $3)
+    RETURNING *`, [topicId, resourceId])
+    .then(res => {
+      return res.rows;
+    })
+}
+
+
+
+
+const getTopicsForResource = function(resourceId) {
+  return db.query(`SELECT topic_id
+  FROM topics_resources
+  WHERE topics_resources.resource_id = $1`, [resourceId])
+  .then(data => {
+    return data.rows;
+  });
+}
+const insertUserTopics = function(userId, topicId) {
+  return db.query(`INSERT INTO user_topics (user_id, topic_id) VALUES ($1, $2) RETURNING *`, [userId, topicId])
+}
+
 exports.getResourcesBySearch = getResourcesBySearch;
 exports.addTopicsToUser = addTopicsToUser;
 exports.getResourcesOrderByCountRating = getResourcesOrderByCountRating;
@@ -327,3 +365,7 @@ exports.insertIntoRatings = insertIntoRatings;
 exports.deleteUploadedResource = deleteUploadedResource;
 exports.getAllMyLikedResourcesBySearch = getAllMyLikedResourcesBySearch;
 exports.deleteTopicFromUser = deleteTopicFromUser;
+exports.addNewResource = addNewResource;
+exports.linkTopicToResource = linkTopicToResource;
+exports.getTopicsForResource = getTopicsForResource;
+exports.insertUserTopics = insertUserTopics;
