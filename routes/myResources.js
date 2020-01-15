@@ -2,6 +2,14 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+  router.get('/', (req, res) => {
+    const id = req.session.user_id;
+    if (id) {
+      res.redirect(`/myResources/${id}`)
+    } else {
+      res.redirect('/');
+    }
+  })
   router.get("/:user_id", (req, res) => {
     const id = req.session.user_id;
     if (id) {
@@ -13,7 +21,7 @@ module.exports = (db) => {
             db.getAllMyUploadedResources(id)
             .then(data => {
               const uploaded = data;
-              const resource = { liked: liked, uploaded: uploaded };
+              const resource = { liked: liked, uploaded: uploaded, userId: userId };
             res.render('myResources', { resource });
             })
             .catch(err => {
@@ -28,6 +36,40 @@ module.exports = (db) => {
       }
     } else {
       res.redirect("/")
+    }
+  });
+
+  router.delete('/delete/:resourceid', (req, res) => {
+    const userId = parseInt(req.session.user_id);
+    const resourceId = req.params.resourceid;
+    if (userId) {
+    db.deleteUploadedResource(resourceId, userId)
+    .then( () => {
+      res.redirect(`/myResources/${userId}`);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send(err.stack)
+    })
+  } else {
+    res.redirect(`/myResources/${userId}`);
+  }
+  });
+
+  router.delete('/unlike/:resourceid', (req, res) => {
+    const userId = parseInt(req.session.user_id);
+    const resourceId = req.params.resourceid;
+    if (userId) {
+      db.deleteLiked(resourceId)
+      .then( () => {
+        res.redirect(`/myResources/${userId}`);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send(err.stack)
+      })
+    } else {
+      res.redirect('/');
     }
   });
 

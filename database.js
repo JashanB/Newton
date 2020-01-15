@@ -267,8 +267,12 @@ const deleteLiked = function (resourceId) {
   return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
 }
 
-const deleteRated= function (resourceId) {
+const deleteRated = function (resourceId) {
   return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1`, [resourceId])
+}
+
+const deleteUploadedResource = function(resourceId, createdBy) {
+  return db.query(`DELETE FROM resources WHERE id = $1 AND created_by = $2`, [resourceId, createdBy])
 }
 
 exports.getResourcesByTopicName = getResourcesByTopicName;
@@ -294,3 +298,4 @@ exports.deleteLiked = deleteLiked;
 exports.checkIfRated = checkIfRated;
 exports.deleteRated = deleteRated;
 exports.insertIntoRatings = insertIntoRatings;
+exports.deleteUploadedResource = deleteUploadedResource;
