@@ -15,7 +15,7 @@
   </head>
   <body>
     <!-- Import header partial -->
-    <%- include('./partials/_nav') %>
+    <%- include('./partials/_header') %>
 
 
 
@@ -42,10 +42,22 @@
 
       <p id="resource-desciption"> <%= resources.resourceInfo.description %></p>
 
+
+
+
+
     <section class="resource-comemnts">
-      <form action="POST">
-      Comment <input method="POST" action="/comment" type="text" ><br>
+      <form action="comment/<%= resources.resourceInfo.id %>?_method=PUT" method="POST">
+      Comment <input name="comment" type="text" ><br>
+      <input type="submit" value="submit">
+
       </form>
+    </section>
+
+
+
+
+
 
       <% for(const comment in resources.comments) { %>
       <article class="comment">
