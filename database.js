@@ -171,14 +171,13 @@ const getAllMyUploadedResources = function(userId) {
 const getResourceByID = (id) => {
   return db.query(`SELECT resources.* FROM resources WHERE resources.id = $1`, [id])
     .then(function(data) {
-      console.log('GET REOURCE BY ID',data.rows)
       return data.rows[0];
     })
 }
 exports.getResourceByID = getResourceByID;
 
 const getCommentsByID = (id) => {
-  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1`, [id])
+  return db.query(`SELECT comments.* FROM comments WHERE comments.resource_id = $1 ORDER BY created_at desc`, [id])
 }
 
 exports.getCommentsByID = getCommentsByID;
@@ -198,7 +197,7 @@ const getLikesByID = (id) => {
 exports.getLikesByID  = getLikesByID;
 
 const postComment = (resource_id, user_id, text) => {
-  return db.query(`INSERT INTO comments (resource_id, user_id, text, created_at) values ($1, $2, $3`, [resource_id, user_id, text]);
+  return db.query(`INSERT INTO comments (resource_id, user_id, text) values ($1, $2, $3);`, [resource_id, user_id, text]);
 }
 
 exports.postComment  = postComment;

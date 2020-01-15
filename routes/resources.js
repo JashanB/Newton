@@ -5,7 +5,6 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
-    console.log(req.params.id)
     db.getResourceByID(req.params.id)
       .then(data => {
         const resourceInfo = data;
@@ -52,7 +51,7 @@ module.exports = (db) => {
           // })
           .then(data => {
             const resources = data
-            console.log('CONSOLE.log', data)
+
             res.render('../views/resources', { resources })
           })
       })
@@ -70,7 +69,7 @@ module.exports = (db) => {
     const resourceId = req.params.id;
     //if
     db.insertIntoLikes(userId, resourceId)
-    .then(data => {
+    .then(() => {
       res.redirect('/resources/:id');
     })
     .catch(err => {
@@ -80,9 +79,16 @@ module.exports = (db) => {
   });
 
   router.put("/comment/:id", (req, res) => {
-    console.log('REQ', req.body.comment);
-  });
+    const userId = parseInt(req.session.user_id);
+    const text = req.body.comment
+    const resourceId = req.params.id
 
+    db.postComment(resourceId, userId, text)
+    .then( () => {
+      res.redirect(`/resources/${resourceId}`)
+    }
+    )
+  });
 
   return router;
 };

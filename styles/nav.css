@@ -1,8 +1,27 @@
 nav {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: #000;
-  margin-bottom: 20px;
   padding: 1em 20%;
-  color: white
+  color: white;
+  font-size: 1em
+}
+
+h1 {
+  display: flex;
+
+}
+
+.user-buttons button {
+  font-size: 1em;
+  color: #fff;
+  border: none;
+  background-color: transparent;
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.user-buttons{
+  display: flex;
+
 }
