@@ -57,17 +57,32 @@ module.exports = (db) => {
     //if already liked, then delete, else add
     //if logged in, can like, otherwise render /:resourceid
     if (userId) {
-    db.checkIfLiked(resourceId)
+    db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
         db.deleteLiked(resourceId)
-        .then(data => {
-          res.redirect(`/resources/${resourceId}`);
+        .then(() => {
+          res.redirect(`/resources/${resourceId}`)
         })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
       } else {
         db.insertIntoLikes(userId, resourceId)
-        .then(data => {
-          res.redirect(`/resources/${resourceId}`);
+        .then(() => {
+          db.getTopicsForResource(resourceId)
+          .then(data => {
+            const topics = data;
+            for (let i = 0; i < topics.length; i++) {
+              db.insertUserTopics(userId, topics[i].topic_id)
+            }
+            res.redirect(`/resources/${resourceId}`);
+          })
+          .catch(err => {
+            console.error(err);
+            res.status(500).send(err.stack)
+          });
         })
         .catch(err => {
           console.error(err);
@@ -87,7 +102,7 @@ module.exports = (db) => {
     const resourceId = req.params.resourceid;
     //if already liked, then delete, else add
     if (userId) {
-    db.checkIfRated(resourceId)
+    db.checkIfRated(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
         db.deleteRated(resourceId)

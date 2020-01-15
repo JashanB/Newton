@@ -45,14 +45,14 @@ module.exports = (db) => {
             console.log('in post')
             const userId = user.id;
             db.addTopicsToUser(userId, topic1, topic2, topic3).then( () => {
-              res.json({user_id: userId});
+              res.json({error: null, user_id: userId});
             });
           }).catch(err => {
             console.log(err);
           })
         } else {
           //email in use, sends error -> later change to error on template ejs
-          res.status(404).send('Status Code 404: Error: Email already in use.');
+          res.json({error: 'Sorry, that email appears to already be in use'});
         }
       })
       .catch(err => {
