@@ -43,16 +43,15 @@
 
     <section class="resource-comemnts">
       <form action="comment/<%= resource.data.resourceInfo.id %>?_method=PUT" method="POST">
-      Comment <input name="comment" type="text" ><br>
-      <input type="submit" value="submit">
-
+      <input name="comment" type="text" >
+      <button type="submit" value="submit"></button>
       </form>
 
       <% for(const comment in resource.data.comments) { %>
         <article class="comment">
           <header>
             <h1><%= resource.data.comments[comment].email %></h1>
-            <h4><%= resource.data.comments[comment].created_at %></h4>
+            <h4><%= resource.data.comments[comment].comment_date %></h4>
           </header>
           <section>
             <p><%= resource.data.comments[comment].text %></p>

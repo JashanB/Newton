@@ -11,9 +11,16 @@ body {
  }
 
  .img {
-   text-align: center;
-   margin: 1em 0 0 0;
-   border: black solid 1px;
+   padding: 1em;
+   height: 40vh;
+ }
+
+ .resource-img {
+  height:100%;
+  width:auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
  }
 
 .likes-ratings {
@@ -60,4 +67,11 @@ textarea:focus {
 
 textarea:focus::placeholder {
   color: transparent;
+}
+
+input[type=text] {
+  width: 80%;
+  padding: 15px 22px;
+  margin: 10px 5px;
+  box-sizing: border-box;
 }

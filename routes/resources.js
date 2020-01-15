@@ -39,7 +39,7 @@ module.exports = (db) => {
           .then(data => {
             const userId = req.session.user_id
             const resource = { data, userId };
-            console.log('RESOURCE', resource.data.comments)
+            console.log('RESOURCE', resource.data.ratings)
             res.render('../views/resources',{  resource })
           })
       })
