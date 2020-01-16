@@ -1,9 +1,11 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: #000;
+  background-color: #28587B;
   padding: 1em 25% 1em 21%;
   color: white;
+  border: 1em;
+  border-color: #031D44;
 }
 
 .title {
