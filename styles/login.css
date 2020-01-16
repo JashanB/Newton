@@ -1,0 +1,40 @@
+.login {
+  margin: 0% 20%;
+  padding: 0 5%;
+}
+
+
+ h1 {
+  margin: 1em 0 ;
+  font-size: 2em;
+}
+
+.login-form {
+  height: 3em;
+  font-size: 1em;
+  padding-left: 1em;
+  width: auto;
+
+}
+
+.login-form input {
+  margin: 0px;
+}
+
+
+button.login-form {
+  background-color: rgb(172, 172, 172);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+button.login-form:hover {
+  background-color: rgb(113, 113, 113);
+}
