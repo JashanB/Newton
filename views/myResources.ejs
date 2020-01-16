@@ -24,8 +24,9 @@
 
     <%- include('./partials/_header') %>
     <%- include('./partials/_uploadResource') %>
-    <h1 class="resource-header">Liked resources</h1>
-    <section class="resource-container">
+
+        <h1 class="resource-header">My liked resources</h1>
+        <section class="resource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>
           <a href="/resources/<%=resource.liked[i].id%>">
             <div class="resource-box">
@@ -33,9 +34,10 @@
                 <img class="resource-img" src="<%= resource.liked[i].img_url%>">
             </div>
           </a>
-        <% } %>
-      </section>
-      <h1 class="resource-header">Uploaded resources</h1>
+         <% } %>
+        </section>
+
+        <h1 class="resource-header">My uploaded resources</h1>
       <section class="resource-container">
           <% for (let i = 0; i < resource.uploaded.length; i++) { %>
             <a href="/resources/<%=resource.uploaded[i].id%>">
