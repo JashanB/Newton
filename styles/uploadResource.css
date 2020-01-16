@@ -11,8 +11,8 @@
   position: fixed;
   z-index: 99;
   cursor: pointer;
-  bottom: 5%;
-  right: 5%;
+  bottom: 1%;
+  right: 1.5%;
   border-radius: 50%;
   font-size: 2em;
   font-weight: bold;
