@@ -1,15 +1,5 @@
 insert into topics (name) values ('Biology');
 insert into topics (name) values ('Chemistry');
-insert into topics (name) values ('Statistics');
-insert into topics (name) values ('Trigonometry');
-insert into topics (name) values ('Calculus');
-insert into topics (name) values ('Javascript');
-insert into topics (name) values ('Python');
-insert into topics (name) values ('HTML');
-insert into topics (name) values ('Political Science');
-insert into topics (name) values ('Philosophy');
-insert into topics (name) values ('Engineering');
-insert into topics (name) values ('Physics');
+insert into topics (name) values ('Programming');
 insert into topics (name) values ('Math');
-insert into topics (name) values ('Science');
-insert into topics (name) values ('Machine Learning');
+insert into topics (name) values ('Physics');
