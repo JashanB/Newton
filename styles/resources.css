@@ -12,12 +12,11 @@ body {
 
 .img {
   padding: 1em;
-  height: 40vh;
 }
 
 .resource-img {
-  height: 100%;
-  width: auto;
+  max-width: 100%;
+  max-height: 100%;
   margin-left: auto;
   margin-right: auto;
   display: block;
