@@ -29,7 +29,7 @@
       </form>
     </div>
   </div>
-<section id="resource-container">
+<section class="resource-container">
   <% for (let i = 0; i < resource.data.length; i++) { %>
     <a href="/resources/<%=resource.data[i].id%>">
     <div class="resource-box">
@@ -38,7 +38,7 @@
          <% if (resource.userId) { %>
          <form class="like-button" method="POST" action="/like/<%=resource.data[i].id%>?_method=PUT"><button class="submit"><i class="material-icons">favorite_border</i></button></form>
          <% } else { %>
-        <form method="GET" action="/login"><button class="submit">Like</button></form>
+        <form class="like-button" method="GET" action="/login"><button class="submit">Like</button></form>
         <% } %>
     </div>
   </a>
