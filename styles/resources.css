@@ -1,63 +1,91 @@
 body {
- background-color: rgb(213, 213, 213);
- font-size: 1em
+  background-color: rgb(213, 213, 213);
+  font-size: 1em;
 }
 
 .resource {
-   margin: 0% 20%;
-   padding: 0 10%;
-   background-color: white;
-   height: 100%
- }
+  margin: 0% 20%;
+  padding: 0 5%;
+  background-color: white;
+  height: 100%;
+}
 
- .img {
-   padding: 1em;
-   height: 40vh;
- }
+.img {
+  padding: 1em;
+  height: 40vh;
+}
 
- .resource-img {
-  height:100%;
-  width:auto;
+.resource-img {
+  height: 100%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
- }
-
-.likes-ratings {
-  display:flex;
-  justify-content:  flex-start;
 }
 
+.likes-ratings {
+  display: flex;
+  justify-content: flex-start;
+}
 
- .likes-ratings button {
+.likes-ratings button {
   width: fit-content;
   margin: 1em 0;
   background-color: transparent;
   border: none;
   padding: 0 2em;
- }
+}
 
- .comment {
-   border: 1px black solid;
-   margin: 10px 0 10px 0;
-   padding: 10px
- }
+.comment {
+  border: 1px black solid;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+}
 
- .comment header {
-   display: flex;
-   justify-content:  space-between;
-   margin: 10px 0 10px 0;
- }
+.comment header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 10px 0;
+}
 
- textarea {
-  background-color: #ffffff ;
+.resource-link {
+  padding: 0.5em 0 2em 0;
+}
+
+.resource-title {
+  font-size: 2em;
+}
+
+.resource-desciption {
+  padding-bottom: 10em;
+}
+
+
+a {
+  font-size: 0.9em;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: grey;
+}
+
+.resource-comemnts button {
+  font-size: 1.5em;
   border: none;
-  height: auto;
-  width: 100%;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+textarea {
+  margin-top: 3em;
+  background-color: #ffffff;
+  border: none;
+  width: 80%;
   border-bottom: 5px black solid;
   resize: none;
-  padding-top: 1.1em;
-  height: 65px;
   font-weight: bold;
 }
 
@@ -67,11 +95,4 @@ textarea:focus {
 
 textarea:focus::placeholder {
   color: transparent;
-}
-
-input[type=text] {
-  width: 80%;
-  padding: 15px 22px;
-  margin: 10px 5px;
-  box-sizing: border-box;
 }

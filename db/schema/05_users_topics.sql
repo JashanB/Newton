@@ -7,12 +7,4 @@ CREATE TABLE user_topics(
 );
 
 
--- How to query such a table
--- SELECT users.id, users.name, topics.name FROM topics
--- JOIN user_topics ON user_topics.topic_id = topics.id
--- JOIN users ON user_topics.user_id = users.id
--- WHERE topics.id = 2;
 
--- 1 | John | Super Cool Thing
--- 2 | Joe  | Super Cool Thing
--- 3 | Jill | Super Cool Thing
