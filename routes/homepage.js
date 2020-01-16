@@ -33,11 +33,6 @@ module.exports = (db) => {
       });
   });
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> c2bc988b620415e395e5ba15f365e73d28758aff
   router.get("/:user_id", (req, res) => {
     const id = req.session.user_id;
     if (id) {
@@ -59,22 +54,12 @@ module.exports = (db) => {
     }
   });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c2bc988b620415e395e5ba15f365e73d28758aff
   router.put('/like/:resourceid', (req, res) => {
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
     db.checkIfLiked(resourceId, userId)
-    .then(data => {
-      if (data.length !== 0) {
-        db.deleteLiked(resourceId)
-        .then(data => {
-          res.redirect(`/${userId}`);
-        })
-      } else {
-        db.insertIntoLikes(userId, resourceId)
+    .then(() => {
+      db.insertIntoLikes(userId, resourceId)
         .then(() => {
           db.getTopicsForResource(resourceId)
           .then(data => {
@@ -93,7 +78,7 @@ module.exports = (db) => {
           console.error(err);
           res.status(500).send(err.stack)
         });
-      }
+
     })
 
   });
