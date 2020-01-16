@@ -21,14 +21,14 @@
 
     <%- include('./partials/_header') %>
     <%- include('./partials/_uploadResource') %>
-
+    <% console.log('IMAGE', resource.liked[0].img_url) %>
     <h1>My Resources</h1>
     <p>Liked resources</p>
     <section id="likedResource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>
           <div class="resource-box">
                <span class="resource-title"><%= resource.liked[i].title %></span>
-               <img class="resource-img" src=<%= resource.liked[i].image_url %> />
+               <img class="resource-img" src=<%= resource.liked[i].img_url %> />
                <form method="POST" action="/myResources/unlike/<%=resource.liked[i].id%>?_method=DELETE"><button class="submit">Unlike</button></form>
                <!-- click resource needs to redirect to resource page -->
           </div>
@@ -39,7 +39,7 @@
           <% for (let i = 0; i < resource.uploaded.length; i++) { %>
             <div class="resource-box">
                  <span class="resource-title"><%= resource.uploaded[i].title %></span>
-                 <img class="resource-img" src=<%= resource.uploaded[i].image_url %> />
+                 <img class="resource-img" src=<%= resource.uploaded[i].img_url %> />
                  <form action="/myResources/delete/<%=resource.uploaded[i].id%>?_method=DELETE" method="POST"><button class="submit">Delete</button></form>
                  <!-- click resource needs to redirect to resource page -->
             </div>

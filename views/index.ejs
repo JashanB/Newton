@@ -27,15 +27,17 @@
   </div>
 <section id="resource-container">
   <% for (let i = 0; i < resource.data.length; i++) { %>
+    <a href="/resources/<%=resource.data[i].id%>">
     <div class="resource-box">
          <span class="resource-title"><%= resource.data[i].title %></span>
-         <img class="resource-img" src=<%= resource.data[i].image_url %> />
+        <img class="resource-img" src=<%= resource.data[i].img_url %>/>
          <% if (resource.userId) { %>
          <form method="POST" action="/like/<%=resource.data[i].id%>?_method=PUT"><button class="submit">Like</button></form>
          <% } else { %>
         <form method="GET" action="/login"><button class="submit">Like</button></form>
         <% } %>
     </div>
+  </a>
   <% } %>
 </section>
 </body>
