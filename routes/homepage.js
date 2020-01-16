@@ -54,12 +54,21 @@ module.exports = (db) => {
     }
   });
 
+
   router.put('/like/:resourceid', (req, res) => {
+    //want resource that user liekd to be inserted into likes table with user id and resource id
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
+    //if already liked, then delete, else add
     db.checkIfLiked(resourceId, userId)
-    .then(() => {
-      db.insertIntoLikes(userId, resourceId)
+    .then(data => {
+      if (data.length !== 0) {
+        db.deleteLiked(resourceId)
+        .then(data => {
+          res.redirect(`/${userId}`);
+        })
+      } else {
+        db.insertIntoLikes(userId, resourceId)
         .then(() => {
           db.getTopicsForResource(resourceId)
           .then(data => {
@@ -78,7 +87,7 @@ module.exports = (db) => {
           console.error(err);
           res.status(500).send(err.stack)
         });
-
+      }
     })
 
   });
