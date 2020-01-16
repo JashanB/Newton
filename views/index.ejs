@@ -16,17 +16,21 @@
   <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 </head>
 <%- include('./partials/_header') %>
 <body>
-  <h1></h1>
   <div class="wrap">
     <div class="search">
       <form class="search-bar" method="POST" action="/search">
-        <input type="text" placeholder="Search" name="search">
-        <button type="submit"><i class="fa fa-search"></i>Search</button>
+        <input name="search" class="search-input" type="text">
+        <button type="submit"><i class="fa fa-search"></i></button>
       </form>
+      <!-- <form action="">
+          <input type="search">
+          <i class="fa fa-search"></i>
+      </form> -->
     </div>
   </div>
 <section class="resource-container">
@@ -34,7 +38,7 @@
     <a href="/resources/<%=resource.data[i].id%>">
     <div class="resource-box">
          <span class="resource-title"><%= resource.data[i].title %></span>
-        <img class="resource-img" src=<%= resource.data[i].img_url %>/>
+        <img class="resource-img" src="<%= resource.data[i].img_url %>">
          <% if (resource.userId) { %>
          <form class="like-button" method="POST" action="/like/<%=resource.data[i].id%>?_method=PUT"><button class="submit"><i class="material-icons">favorite_border</i></button></form>
          <% } else { %>
