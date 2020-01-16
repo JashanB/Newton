@@ -8,21 +8,21 @@
     <% if (!resource.userId) { %>
     <div class="user-buttons">
       <form method="GET" action="/login">
-        <button>Login</button>
+        <button class="hvr-grow">Login</button>
       </form>
       <form method="GET" action="/signup">
-        <button >Sign Up</button>
+        <button class="hvr-grow">Sign Up</button>
       </form>
     <% } else { %>
       <div class="user-buttons">
         <form method="GET" action="/myResources">
-          <button >My Resources</button>
+          <button class="hvr-grow" >My Resources</button>
         </form>
         <form method="GET" action="/profile/<%= resource.userId %>">
-          <button >My Profile</button>
+          <button class="hvr-grow" >My Profile</button>
         </form>
         <form method="POST" action="/logout">
-          <button>Logout</button>
+          <button class="hvr-grow">Logout</button>
         </form>
       <% } %>
 

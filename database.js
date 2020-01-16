@@ -153,7 +153,7 @@ const getResourceByID = (id) => {
 exports.getResourceByID = getResourceByID;
 
 const getCommentsByID = (id) => {
-  return db.query(`SELECT comments.* , comments.created_at::date as comment_date, users.email FROM comments
+  return db.query(`SELECT comments.* , TO_CHAR(comments.created_at :: DATE, 'dd/mm/yyyy') as comment_date, users.email FROM comments
   JOIN users ON users.id = comments.user_id
   WHERE comments.resource_id = $1
   ORDER BY comments.created_at desc
