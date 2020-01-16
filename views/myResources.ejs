@@ -13,21 +13,25 @@
 
   </head>
   <body>
-    <div class="wrap">
+    <!-- <div class="wrap">
         <div class="search">
           <form class="search-bar" method="POST" action="/myResources/search/<%=resource.userId%>">
             <input type="text" placeholder="Search" name="search">
             <button type="submit"><i class="fa fa-search"></i>Search</button>
           </form>
         </div>
-    </div>
+    </div> -->
+    <div class="wrap">
+        <div class="search">
+          <form class="search-bar" method="POST" action="/search">
+            <input name="search" class="search-input" type="text">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
 
     <%- include('./partials/_header') %>
     <%- include('./partials/_uploadResource') %>
-<<<<<<< HEAD
-    <h1>My Resources</h1>
-=======
->>>>>>> master
     <h1 class="resource-header">Liked resources</h1>
     <section class="resource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>
