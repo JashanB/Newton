@@ -11,3 +11,4 @@ insert into topics_resources (topic_id, resource_id) values (5, 10);
 insert into topics_resources (topic_id, resource_id) values (1, 11);
 insert into topics_resources (topic_id, resource_id) values (5, 12);
 insert into topics_resources (topic_id, resource_id) values (5, 13);
+insert into topics_resources (topic_id, resource_id) values (3, 14);

@@ -1,7 +1,9 @@
 insert into user_topics (user_id, topic_id) values (1, 1);
 insert into user_topics (user_id, topic_id) values (1, 2);
 insert into user_topics (user_id, topic_id) values (1, 3);
+insert into user_topics (user_id, topic_id) values (1, 4);
 insert into user_topics (user_id, topic_id) values (1, 5);
+
 
 insert into user_topics (user_id, topic_id) values (2, 1);
 insert into user_topics (user_id, topic_id) values (2, 4);

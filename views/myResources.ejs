@@ -10,6 +10,7 @@
     <link href="/styles/myResources.css" rel="stylesheet" type="text/css" >
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
 
+
   </head>
   <body>
     <div class="wrap">
@@ -23,14 +24,13 @@
 
     <%- include('./partials/_header') %>
     <%- include('./partials/_uploadResource') %>
-    <h1>My Resources</h1>
     <h1 class="resource-header">Liked resources</h1>
     <section class="resource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>
           <a href="/resources/<%=resource.liked[i].id%>">
             <div class="resource-box">
                 <span class="resource-title"><%= resource.liked[i].title %></span>
-                <img class="resource-img" src=<%= resource.liked[i].img_url %>/>
+                <img class="resource-img" src="<%= resource.liked[i].img_url%>">
             </div>
           </a>
         <% } %>
@@ -41,7 +41,7 @@
             <a href="/resources/<%=resource.uploaded[i].id%>">
               <div class="resource-box">
                   <span class="resource-title"><%= resource.uploaded[i].title %></span>
-                  <img class="resource-img" src=<%= resource.uploaded[i].img_url %>/>
+                  <img class="resource-img" src="<%= resource.uploaded[i].img_url %>">
               </div>
             </a>
           <% } %>
