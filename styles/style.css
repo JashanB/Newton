@@ -5,6 +5,8 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
 /* Grow */
 .hvr-grow {
   display: inline-block;
