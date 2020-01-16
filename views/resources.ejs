@@ -54,7 +54,7 @@
     <section class="resource-comemnts">
       <form action="comment/<%= resource.data.resourceInfo.id %>?_method=PUT" method="POST">
       <textarea name="comment" type="text" ></textarea>
-      <button type="submit" value="submit"></button>
+        <button type="submit" value="submit">Comment</button>
       </form>
 
       <% for(const comment in resource.data.comments) { %>
