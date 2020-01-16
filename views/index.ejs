@@ -22,18 +22,12 @@
 <%- include('./partials/_header') %>
 <%- include('./partials/_uploadResource') %>
 <body>
-  <div class="wrap">
     <div class="search">
       <form class="search-bar" method="POST" action="/search">
         <input name="search" class="search-input" type="text">
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <i class="fa fa-search"></i>
       </form>
-      <!-- <form action="">
-          <input type="search">
-          <i class="fa fa-search"></i>
-      </form> -->
     </div>
-  </div>
 <section class="resource-container">
   <% for (let i = 0; i < resource.data.length; i++) { %>
     <a href="/resources/<%=resource.data[i].id%>">

@@ -5,12 +5,13 @@ const router  = express.Router();
 module.exports = (db) => {
   //upload form
   router.get("/", (req, res) => {
-    let id = req.session.user_id;
-    if (id) {
+    let userId = req.session.user_id;
+    if (userId) {
       return db.getAllTopics()
       .then(topics => {
-        console.log(topics);
-        let resource = { topics, id }
+
+        let resource = { topics, userId }
+        console.log(resource);
         res.render("upload", { resource });
       })
     } else {

@@ -9,6 +9,7 @@ module.exports = (db) => {
     } else {
     db.getResourcesOrderByCountRating()
       .then(data => {
+        console.log(data)
         const resource = { data: data };
         res.render('index', { resource });
       })
@@ -32,8 +33,11 @@ module.exports = (db) => {
       });
   });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c2bc988b620415e395e5ba15f365e73d28758aff
   router.get("/:user_id", (req, res) => {
     const id = req.session.user_id;
     if (id) {
@@ -55,12 +59,13 @@ module.exports = (db) => {
     }
   });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2bc988b620415e395e5ba15f365e73d28758aff
   router.put('/like/:resourceid', (req, res) => {
-    //want resource that user liekd to be inserted into likes table with user id and resource id
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
-    //if already liked, then delete, else add
     db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
