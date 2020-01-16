@@ -33,21 +33,6 @@ module.exports = (db) => {
       });
   });
 
-  // router.get("/mostrecent", (req, res) => {
-  //   db.getResourcesByCreatedAt()
-  //   .then(data => {
-  //     const resource = {data:data};
-  //     res.render('mostrecent', { resource });
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
-  // });
-
-  router.get("/signup", (req, res) => {
-    res.render("signup");
-  })
-
   router.get("/:user_id", (req, res) => {
     const id = req.session.user_id;
     if (id) {
@@ -69,16 +54,9 @@ module.exports = (db) => {
     }
   });
 
-  router.post('/like/resource_id/user_id', (req, res) => {
-    //want resource that user liekd to be inserted into likes table with user id and resource id
-
-  });
-
   router.put('/like/:resourceid', (req, res) => {
-    //want resource that user liekd to be inserted into likes table with user id and resource id
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
-    //if already liked, then delete, else add
     db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
