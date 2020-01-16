@@ -1,7 +1,7 @@
 .upload-resource button {
-  background-color: rgb(138, 138, 138);
+  background-color: rgb(114, 114, 114);
   border: none;
-  color: white;
+  color: rgb(242, 242, 242);
   padding: 20px;
   text-align: center;
   text-decoration: none;
@@ -11,8 +11,8 @@
   position: fixed;
   z-index: 99;
   cursor: pointer;
-  bottom: 5%;
-  right: 5%;
+  bottom: 10%;
+  right: 15%;
   border-radius: 50%;
   font-size: 2em;
   font-weight: bold;

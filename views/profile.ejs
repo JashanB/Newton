@@ -12,36 +12,39 @@
     <script type="text/javascript" src="/scripts/profile.js"></script>
 
     <!-- CSS -->
-    <link href="/styles/profile.css" rel="stylesheet" type="text/css" >
-    <link href="/styles/style.css" rel="stylesheet" type="text/css" >
+    <link href="/styles/profile.css" rel="stylesheet" type="text/css" />
+    <link href="/styles/style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <%- include('./partials/_header') %>
-    <%- include('./partials/_uploadResource') %>
+    <%- include('./partials/_header') %> <%-
+    include('./partials/_uploadResource') %>
 
+    <section class="profile">
+      <h1>Profile</h1>
+      <form id="update-email" action="/profile/email" method="POST">
+        <h3>Edit your email</h3>
 
-    <h1>Profile</h1>
-    <form id="update-email" action="/profile/email" method="POST">
-      <label>Enter new email to update:</label>
+        <input
+          class="email-form"
+          type="email"
+          name="email"
+          placeholder="example@email.com"
+        />
+        <button class="email-form" type="submit">Update</button>
+      </form>
+      <article id="updated-email-message">
+        <h2>Thank you! Your email has been updated!</h2>
+      </article>
 
-      <input type="email" name="email" placeholder="example@email.com">
-      <button type="submit">Update</button>
-  </form>
-  <article id="updated-email-message">
-    <p>Thank you! Your email has been updated!</p>
-  </article>
-  <h3>Click delete to removie a topic from your topics of interest:</h3>
-  <%for (let topic of resource.topics) { %>
-    <p><%= topic.name %></p>
-    <form method="POST" action="/profile/<%=topic.id%>">
-      <button type="submit">Delete</button>
-    </form>
-<% } %>
+      <h3>Remove Topics</h3>
+      <section class="remove">
+        <%for (let topic of resource.topics) { %>
+        <form class='remove-form' method="POST" action="/profile/<%=topic.id%>">
+          <button class="remove-button" type="submit"><%= topic.name %>&nbsp;<span id='x'>X</span></button>
+        </form>
+        <% } %>
+      </section>
+    </section>
   </body>
 </html>
-
-
-
-
-
