@@ -163,7 +163,7 @@ const getCommentsByID = (id) => {
 exports.getCommentsByID = getCommentsByID;
 
 const getRatingByID = (id) => {
-  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = 2) FROM ratings WHERE ratings.resource_id = $1
+  return db.query(`SELECT ratings.* , (SELECT count(ratings.id) FROM ratings WHERE ratings.resource_id = $1) FROM ratings WHERE ratings.resource_id = $1
                   GROUP BY ratings.id`, [id])
 }
 

@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   $upload.submit(function() {
     event.preventDefault();
-    const title = $("input[name='title']").val()
+    const title = $("textarea[name='title']").val()
     const description = $("#resource-description").val()
     const imageURL = $("input[name='imageURL']").val()
     const resourceURL = $("input[name='resourceURL']").val()
