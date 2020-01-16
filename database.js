@@ -52,7 +52,7 @@ const getUserWithId = function (id) {
 
 
 const getResourcesOrderByCountRating = function () {
-  return db.query(`SELECT * FROM resources
+  return db.query(`SELECT resources.* FROM resources
   LEFT OUTER JOIN ratings ON ratings.resource_id = resources.id
   WHERE resources.is_deleted = FALSE
   GROUP BY resources.id, ratings.id
@@ -65,11 +65,13 @@ const getResourcesOrderByCountRating = function () {
 
 const getResourcesByTopicsForUser = function (id) {
   return db.query(`SELECT resources.*
-    FROM user_topics
-    JOIN topics_resources ON topics_resources.topic_id = user_topics.topic_id
-    JOIN resources ON topics_resources.resource_id = resources.id
-    JOIN likes ON resources.id = likes.resource_id
-    WHERE user_topics.user_id = $1 AND likes.user_id <> $1;
+  FROM resources
+  JOIN topics_resources ON topics_resources.resource_id = resources.id
+  JOIN topics ON topics_resources.topic_id = topics.id
+  JOIN user_topics ON topics_resources.topic_id = user_topics.topic_id
+  JOIN likes ON resources.id = likes.resource_id
+  WHERE user_topics.user_id = $1 AND likes.user_id <> $1
+  GROUP BY resources.id;
     `, [id])
     .then(data => {
       return data.rows;

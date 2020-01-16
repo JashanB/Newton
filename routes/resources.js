@@ -5,6 +5,7 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
+    console.log('reached')
     db.getResourceByID(req.params.id)
       .then(data => {
         const resourceInfo = data;
@@ -39,7 +40,6 @@ module.exports = (db) => {
           .then(data => {
             const userId = req.session.user_id
             const resource = { data, userId };
-            console.log('RESOURCE', resource.data.ratings)
             res.render('../views/resources',{  resource })
           })
       })

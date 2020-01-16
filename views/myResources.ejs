@@ -9,29 +9,22 @@
     <link href="/styles/style.css" rel="stylesheet" type="text/css" >
     <link href="/styles/myResources.css" rel="stylesheet" type="text/css" >
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 
 
   </head>
   <body>
-    <!-- <div class="wrap">
-        <div class="search">
-          <form class="search-bar" method="POST" action="/myResources/search/<%=resource.userId%>">
-            <input type="text" placeholder="Search" name="search">
-            <button type="submit"><i class="fa fa-search"></i>Search</button>
-          </form>
-        </div>
-    </div> -->
+    <%- include('./partials/_header') %>
+    <%- include('./partials/_uploadResource') %>
     <div class="wrap">
         <div class="search">
-          <form class="search-bar" method="POST" action="/search">
+          <form class="search-bar" method="POST" action="/myResources/search/<%=resource.userId%>">
             <input name="search" class="search-input" type="text">
-            <button type="submit"><i class="fa fa-search"></i></button>
+              <i class="fa fa-search"></i>
           </form>
         </div>
       </div>
-
-    <%- include('./partials/_header') %>
-    <%- include('./partials/_uploadResource') %>
     <h1 class="resource-header">Liked resources</h1>
     <section class="resource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>

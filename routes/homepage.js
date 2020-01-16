@@ -9,6 +9,7 @@ module.exports = (db) => {
     } else {
     db.getResourcesOrderByCountRating()
       .then(data => {
+        console.log(data)
         const resource = { data: data };
         res.render('index', { resource });
       })
