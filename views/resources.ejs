@@ -27,7 +27,13 @@
 
         <form method="POST" action="/resources/rating/<%=resource.data.resourceInfo.id%>?_method=PUT">
           <button type='submit'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></button>
-           <%= resource.data.ratings.count %>
+           <% if (!resource.data.ratings[0]) { %>
+                0
+            <% } else { %>
+
+              <%= resource.data.ratings[0].count %>
+
+            <% } %>
         </form>
 
         <form method="POST" action="/resources/like/<%=resource.data.resourceInfo.id%>?_method=PUT">
@@ -36,15 +42,19 @@
         </form>
       </section>
 
+      <h1 class="resource-title"><%= resource.data.resourceInfo.title %></h1>
+
+      <div class="resource-link">
       <a id="url" href=<%= resource.data.resourceInfo.url %>><%= resource.data.resourceInfo.url %></a>
+      </div>
 
       <p id="resource-desciption"> <%= resource.data.resourceInfo.description %></p>
 
 
     <section class="resource-comemnts">
       <form action="comment/<%= resource.data.resourceInfo.id %>?_method=PUT" method="POST">
-      <input name="comment" type="text" >
-      <button type="submit" value="submit"></button>
+      <textarea name="comment" type="text" ></textarea>
+        <button type="submit" value="submit">Comment</button>
       </form>
 
       <% for(const comment in resource.data.comments) { %>
