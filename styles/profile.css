@@ -6,22 +6,42 @@
   margin: 0% 20%;
 }
 
+
+.profile h1 {
+  margin-top: 2em;
+  font-size: 2em;
+}
+
+h3 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
 .email-form {
   height: 3em;
-  width: 40%;
   font-size: 1em;
   padding-left: 1em;
-
+  padding-right: 8em;
 }
 
 button.email-form {
-  width: 10%;
-  color: brown;
-  margin: auto;
+  background-color: rgb(172, 172, 172);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+button.email-form:hover {
+  background-color: rgb(113, 113, 113);
 }
 
 .remove {
-  border: 1px solid black;
   padding: 1em;
 }
 
@@ -35,7 +55,6 @@ button.email-form {
   cursor: pointer;
   background-color: rgb(232, 232, 232);
   padding: 0;
-  border-radius: 10%;
   margin-right: .5em;
   display: inline-block;
 }
@@ -44,5 +63,4 @@ button.email-form {
   background-color: rgb(250, 85, 85);
   font-weight: bold;
   padding:0 .5em;
-  border-radius: 10%;
 }
