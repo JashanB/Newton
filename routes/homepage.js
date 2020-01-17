@@ -54,9 +54,12 @@ module.exports = (db) => {
     }
   });
 
+
   router.put('/like/:resourceid', (req, res) => {
+    //want resource that user liekd to be inserted into likes table with user id and resource id
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
+    //if already liked, then delete, else add
     db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {

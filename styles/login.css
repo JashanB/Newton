@@ -1,5 +1,6 @@
 .login {
-  background: #fff;
+  background-color: #f5faff;
+  background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
   max-width: 500px;
   margin: 30px auto ;
 }
