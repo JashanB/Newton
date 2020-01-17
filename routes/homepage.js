@@ -56,17 +56,20 @@ module.exports = (db) => {
 
 
   router.put('/like/:resourceid', (req, res) => {
-    //want resource that user liekd to be inserted into likes table with user id and resource id
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
-    //if already liked, then delete, else add
+    if (userId) {
     db.checkIfLiked(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
-        db.deleteLiked(resourceId)
-        .then(data => {
+        db.deleteLiked(resourceId, userId)
+        .then(() => {
           res.redirect(`/${userId}`);
         })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send(err.stack)
+        });
       } else {
         db.insertIntoLikes(userId, resourceId)
         .then(() => {
@@ -89,7 +92,9 @@ module.exports = (db) => {
         });
       }
     })
-
+  } else {
+    res.redirect(`/resources/${resourceId}`)
+  }
   });
 
   return router;

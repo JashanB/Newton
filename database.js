@@ -69,8 +69,8 @@ const getResourcesByTopicsForUser = function (id) {
   JOIN topics_resources ON topics_resources.resource_id = resources.id
   JOIN topics ON topics_resources.topic_id = topics.id
   JOIN user_topics ON topics_resources.topic_id = user_topics.topic_id
-  JOIN likes ON resources.id = likes.resource_id
-  WHERE user_topics.user_id = $1 AND likes.user_id <> $1
+  LEFT JOIN likes ON resources.id = likes.resource_id
+  WHERE user_topics.user_id = $1 AND (likes IS NULL OR likes.user_id <> $1)
   GROUP BY resources.id;
     `, [id])
     .then(data => {
@@ -197,6 +197,7 @@ const insertIntoLikes = function (userid, resourceid) {
   RETURNING *
   `, [userid, resourceid])
     .then(function (res) {
+      console.log('HERE', res)
       console.log(res.rows)
     })
 };
@@ -247,8 +248,8 @@ const checkIfRated = function(resourceId, userId) {
   })
 }
 
-const deleteLiked = function (resourceId) {
-  return db.query(`DELETE FROM likes WHERE likes.resource_id = $1`, [resourceId])
+const deleteLiked = function (resourceId, userId) {
+  return db.query(`DELETE FROM likes WHERE likes.resource_id = $1 AND likes.user_id = $2`, [resourceId, userId])
 }
 
 
