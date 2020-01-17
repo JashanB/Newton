@@ -15,7 +15,7 @@
   font-size: 2em;
 }
 
-h3 {
+h2 {
   margin-top: 2em;
   margin-bottom: 1em;
 }
@@ -48,6 +48,7 @@ button.email-form:hover {
 
 .remove-form {
   display: inline-block;
+  margin: em;
 }
 .remove-button {
   background-color: white;
@@ -59,10 +60,16 @@ button.email-form:hover {
 }
 
 #x {
-  background-color: rgb(249, 18, 18);
+  background-color:rgb(183, 56, 56);
   font-weight: bold;
   padding:0 .5em;
   margin: 0;
   color: #fff;
-  border: 2.5px  rgb(249, 18, 18) solid
+  border: 2.5px  rgb(183, 56, 56) solid;
+}
+
+.edit-box {
+  margin-bottom: 2em;
+  margin-top: 2em;
+
 }
