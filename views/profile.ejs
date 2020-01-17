@@ -14,6 +14,7 @@
     <!-- CSS -->
     <link href="/styles/profile.css" rel="stylesheet" type="text/css" />
     <link href="/styles/style.css" rel="stylesheet" type="text/css" />
+
   </head>
 
   <body>
@@ -41,7 +42,7 @@
       <section class="remove">
         <%for (let topic of resource.topics) { %>
         <form class='remove-form' method="POST" action="/profile/<%=topic.id%>">
-          <button class="remove-button" type="submit"><%= topic.name %>&nbsp;<span class='hvr-grow' id='x'>X</span></button>
+          <button class="remove-button" type="submit"><%= topic.name %>&nbsp;<span class="hvr-grow"id='x'>X</span></button>
         </form>
         <% } %>
       </section>

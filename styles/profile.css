@@ -3,7 +3,8 @@
 }
 
 .profile {
-  background: #fff;
+  background-color: #f5faff;
+  background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
   max-width: 500px;
   margin: 50px auto 0 ;
 }
@@ -43,26 +44,25 @@ button.email-form:hover {
   background-color: rgb(113, 113, 113);
 }
 
-.remove {
-  padding: 1em;
-}
+
 
 .remove-form {
   display: inline-block;
 }
 .remove-button {
-  background-color: grey;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1.5em;
+  background-color: white;
+  color: black;
+  border: 2px solid #000;
   padding-left: .5em;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
 #x {
-  background-color: rgb(250, 85, 85);
+  background-color: rgb(249, 18, 18);
   font-weight: bold;
   padding:0 .5em;
+  margin: 0;
+  color: #fff;
+  border: 2.5px  rgb(249, 18, 18) solid
 }

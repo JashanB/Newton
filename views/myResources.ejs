@@ -28,12 +28,14 @@
     <h1 class="resource-header">Liked resources</h1>
     <section class="resource-container">
         <% for (let i = 0; i < resource.liked.length; i++) { %>
+         <div class="hvr-border-fade">
           <a href="/resources/<%=resource.liked[i].id%>">
             <div class="resource-box">
                 <span class="resource-title"><%= resource.liked[i].title %></span>
                 <img class="resource-img" src="<%= resource.liked[i].img_url%>">
             </div>
           </a>
+        </div>
          <% } %>
         </section>
 

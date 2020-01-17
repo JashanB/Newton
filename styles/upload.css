@@ -1,5 +1,6 @@
 .upload-resource {
-  background: #fff;
+  background-color: #f5faff;
+  background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
   max-width: 500px;
   margin: 30px auto ;
 
@@ -28,6 +29,13 @@ input {
 ul {
   list-style-type:none;
   display: flex;
+}
+
+h1 {
+padding: 0 0 1em;
+
+
+
 }
 
 select {
