@@ -80,11 +80,12 @@
 
 
     <section class="resource-comemnts">
-      <form action="comment/<%= resource.data.resourceInfo.id %>?_method=PUT" method="POST">
-      <textarea rows="1" name="comment" type="text" ></textarea>
-        <button type="submit" value="submit">Comment</button>
-      </form>
-
+      <article class="new-comment-box">
+        <form action="comment/<%= resource.data.resourceInfo.id %>?_method=PUT" method="POST">
+          <textarea class="text-area" rows="1" name="comment" type="text" ></textarea>
+          <button id="comment-button" type="submit" value="submit">Comment</button>
+        </form>
+      </article>
       <% for(const comment in resource.data.comments) { %>
         <article class="comment">
           <header>
