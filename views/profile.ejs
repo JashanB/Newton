@@ -23,29 +23,28 @@
 
     <section class="profile">
       <h1>Profile</h1>
-      <form id="update-email" action="/profile/email" method="POST">
-        <h3>Edit your email</h3>
-
-        <input
-          class="email-form"
-          type="email"
-          name="email"
-          placeholder="example@email.com"
-        />
-        <button class="email-form" type="submit">Update</button>
-      </form>
-      <article id="updated-email-message">
-        <h2>Thank you! Your email has been updated!</h2>
-      </article>
-
-      <h3>Remove Topics</h3>
-      <section class="remove">
-        <%for (let topic of resource.topics) { %>
-        <form class='remove-form' method="POST" action="/profile/<%=topic.id%>">
-          <button class="remove-button" type="submit"><%= topic.name %>&nbsp;<span class="hvr-grow"id='x'>X</span></button>
+      <article class="edit-box">
+        <h2>Edit your email</h2>
+        <form id="update-email" action="/profile/email" method="POST">
+          <input
+            class="email-form"
+            type="email"
+            name="email"
+            placeholder="example@email.com"
+          />
+          <button class="email-form" type="submit">Update</button>
         </form>
-        <% } %>
-      </section>
+      </article>
+      <article class="edit-box">
+        <h2>Remove Topics</h2>
+        <section class="remove">
+          <%for (let topic of resource.topics) { %>
+          <form class='remove-form' method="POST" action="/profile/<%=topic.id%>">
+            <button class="remove-button" type="submit"><%= topic.name %>&nbsp;<span class="hvr-grow"id='x'>X</span></button>
+          </form>
+          <% } %>
+        </section>
+      </article>
     </section>
   </body>
 </html>

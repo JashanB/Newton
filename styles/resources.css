@@ -6,6 +6,7 @@ body {
 .resource {
   margin: 0% 20%;
   padding: 0 5%;
+  padding-bottom: 3%;
   background-color: white;
   height: 100%;
 }
@@ -21,6 +22,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   display: block;
+  border: 2px black solid;
 }
 
 .likes-ratings {
@@ -34,6 +36,8 @@ body {
   background-color: transparent;
   border: none;
   padding: 0 2em;
+  outline-width: 0;
+  cursor: pointer;
 }
 
 
@@ -78,8 +82,13 @@ a:hover {
 .resource-comemnts button {
   font-size: 1.5em;
   border: none;
-  background-color: transparent;
+  border-radius: 10px;
+  background-color: #e7e7e7;
   cursor: pointer;
+  position: relative;
+  bottom: 0.6em;
+  left: 1em;
+  padding: 0.3em;
 
 }
 textarea {
@@ -101,4 +110,8 @@ textarea:focus {
 
 textarea:focus::placeholder {
   color: transparent;
+}
+
+.text-area {
+  width: 80%;
 }
