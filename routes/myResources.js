@@ -84,10 +84,11 @@ module.exports = (db) => {
   });
 
   router.delete('/unlike/:resourceid', (req, res) => {
+    console.log('ROTED')
     const userId = parseInt(req.session.user_id);
     const resourceId = req.params.resourceid;
     if (userId) {
-      db.deleteLiked(resourceId)
+      db.deleteLiked(resourceId, userId)
       .then( () => {
         res.redirect(`/myResources/${userId}`);
       })

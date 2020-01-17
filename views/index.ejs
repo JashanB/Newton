@@ -39,9 +39,13 @@
          <span class="resource-title"><%= resource.data[i].title %></span>
         <img class="resource-img" src="<%= resource.data[i].img_url %>">
          <% if (resource.userId) { %>
-         <form id="likes-button" class="like-button" method="POST" action="/like/<%=resource.data[i].id%>?_method=PUT"><button class="submit"><i class="material-icons">favorite_border</i></button></form>
+         <form id="likes-button" class="like-button" method="POST" action="/like/<%=resource.data[i].id%>?_method=PUT">
+          <button class="heart" type='submit'> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg> </button>
+        </form>
          <% } else { %>
-        <form class="like-button" method="GET" action="/login"><button class="submit">Like</button></form>
+        <form class="like-button" method="GET" action="/login">
+          <button class="heart" type='submit'> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg> </button>
+        </form>
         <% } %>
     </div>
   </div>

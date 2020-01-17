@@ -10,7 +10,7 @@
 
 .resource-box {
   display: flex;
-  background-color: rgb(213, 213, 213);
+  background-color: #EDF1F5;
   width: 20em;
   height: 15em;
   margin: 0.5em;
@@ -30,16 +30,21 @@
   position: absolute;
   padding-right: 4%;
   padding-bottom: 1.5%;
-  /* font-family: 'Merriweather', serif; */
-  font-family: 'Libre Baskerville', serif;
   color: #1b262c;
-
+  font-weight: bold;
 }
 
-.like-button {
+.heart {
   left: 0;
   position: absolute;
   bottom: 0;
+  border: none;
+  background-color: transparent;
+  padding-left: 1%
+}
+.heart:hover {
+  fill: rgb(173, 25, 73)
+
 }
 
 .resource-header {
@@ -62,6 +67,7 @@
   padding: 5px;
   margin-top: 0.5%;
   margin-left: 1%;
+  left: 4.1%;
 }
 
 .search-input {
@@ -95,7 +101,7 @@
 }
 
 .search-bar:hover {
-  width: 200px;
+  width: 300px;
   cursor: pointer;
 }
 

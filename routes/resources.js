@@ -102,7 +102,7 @@ module.exports = (db) => {
     db.checkIfRated(resourceId, userId)
     .then(data => {
       if (data.length !== 0) {
-        db.deleteRated(resourceId)
+        db.deleteRated(resourceId, userId)
         .then(data => {
           res.redirect(`/resources/${resourceId}`);
         })

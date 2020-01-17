@@ -249,6 +249,7 @@ const checkIfRated = function(resourceId, userId) {
 }
 
 const deleteLiked = function (resourceId, userId) {
+  console.log('HITTING DELETE')
   return db.query(`DELETE FROM likes WHERE likes.resource_id = $1 AND likes.user_id = $2`, [resourceId, userId])
 }
 
@@ -280,8 +281,8 @@ const deleteTopicFromUser = function(userId, topicId) {
 
 
 
-const deleteRated = function (resourceId) {
-  return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1`, [resourceId])
+const deleteRated = function (resourceId, userId) {
+  return db.query(`DELETE FROM ratings WHERE ratings.resource_id = $1 AND ratings.user_id = $2`, [resourceId, userId])
 }
 
 const deleteUploadedResource = function(resourceId, createdBy) {
