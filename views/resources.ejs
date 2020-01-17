@@ -14,11 +14,36 @@
 
 
 
+<% for(const like in resource.data.likes) { %>
+  <% if (resource.data.likes[like].user_id === resource.userId) { %>
+      <style>
+        .heart {
+         fill: rgb(173, 25, 73)
+        }
+
+      </style>
+      <% } %>
+    <% } %>
+
+    <% for(const rate in resource.data.ratings) { %>
+      <% if (resource.data.ratings[rate].user_id === resource.userId) { %>
+          <style>
+            .up {
+              fill: gold;
+            }
+
+          </style>
+          <% } %>
+        <% } %>
+
+
+
   </head>
 
   <body>
     <%- include('./partials/_header') %>
     <%- include('./partials/_uploadResource') %>
+
 
 
     <section class="resource">
@@ -30,7 +55,7 @@
       <section class="likes-ratings">
 
         <form method="POST" action="/resources/rating/<%=resource.data.resourceInfo.id%>?_method=PUT">
-          <button type='submit'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></button>
+          <button type='submit' class="hvr-float"><svg class="up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/></svg></button>
            <% if (!resource.data.ratings[0]) { %>
                 0
             <% } else { %>
@@ -41,8 +66,7 @@
         </form>
 
         <form method="POST" action="/resources/like/<%=resource.data.resourceInfo.id%>?_method=PUT">
-          <button type='submit'> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg> </button>
-        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"/></svg> -->
+          <button class="hvr-grow" type='submit'> <svg class='heart' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg> </button>
         </form>
       </section>
 

@@ -10,6 +10,7 @@ nav {
 
 i {
   padding-right: .3em;
+  outline-width: 0;
 }
 .title {
   display: flex;
@@ -18,9 +19,15 @@ i {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-family: 'Fredericka the Great'
+  font-family: 'Fredericka the Great';
+  outline-width: 0;
 
 }
+.title:hover {
+  color: rgb(189, 189, 189)
+}
+
+
 
 .user-buttons button {
   margin-top: 1.5em;
@@ -30,6 +37,7 @@ i {
   background-color: transparent;
   margin-left: 1em;
   cursor: pointer;
+
 }
 
 .user-buttons{
