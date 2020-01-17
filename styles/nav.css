@@ -8,6 +8,9 @@ nav {
   border-color: #1B262C;
 }
 
+i {
+  padding-right: .3em;
+}
 .title {
   display: flex;
   font-size: 3em;

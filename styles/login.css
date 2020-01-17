@@ -14,12 +14,13 @@
   height: 3em;
   font-size: 1em;
   padding-left: 1em;
-  width: auto;
+
 
 }
 
-.login-form input {
+ input {
   margin: 0px;
+  width: 20em
 }
 
 

@@ -30,6 +30,7 @@
     </div>
 <section class="resource-container">
   <% for (let i = 0; i < resource.data.length; i++) { %>
+    <div class="hvr-border-fade">
     <a href="/resources/<%=resource.data[i].id%>">
     <div class="resource-box">
          <span class="resource-title"><%= resource.data[i].title %></span>
@@ -40,6 +41,7 @@
         <form class="like-button" method="GET" action="/login"><button class="submit">Like</button></form>
         <% } %>
     </div>
+  </div>
   </a>
   <% } %>
 </section>
